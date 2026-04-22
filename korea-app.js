@@ -82,16 +82,7 @@ const HERO_MESSAGE_DARKS = [
   "백령도와 서울을 나란히 두면 겨울 바람이 누구 편인지 꽤 노골적으로 드러납니다.",
   "한국지리는 면적이 작아서 쉬운 게 아니라, 작아 보이는데도 차이가 자꾸 나서 더 얄밉습니다.",
 ];
-const ECONOMY_EGG_JOKES = [
-  "경제지리 속보: 이 농담은 아직 산업 입지를 못 찾아서 웃음 생산량이 낮습니다.",
-  "공업 단지는 모이기라도 하는데, 제 센스는 아직 집적 효과가 없습니다.",
-  "중심지 이론은 멋있는데 제 드립은 늘 배후지가 너무 좁습니다.",
-  "항만도시는 물류가 돌고, 이 농담은 말만 돕니다.",
-  "오늘의 경제지리 메모: 운송비는 줄여도 썰렁함 비용은 줄이기 어렵습니다.",
-  "입지 삼각형은 계산이라도 되는데, 이 농담은 수요 예측부터 실패했습니다.",
-  "CBD는 중심업무지구인데, 이 드립의 중심 업무는 아직 길을 잃었습니다.",
-  "집적경제는 효율을 올리지만, 어이없는 농담은 모일수록 더 어이가 없어집니다.",
-];
+const ECONOMY_EGG_MESSAGE = "<준비중입니다>";
 const HERO_MESSAGE_OPENERS = [
   "백령도에서 서귀포까지 훑어 보면,",
   "영동과 영서를 한 화면에 올리면,",
@@ -229,7 +220,7 @@ function showEconomyEggToast() {
   }
 
   elements.economyEggToast.hidden = false;
-  elements.economyEggToast.textContent = pickRandomItem(ECONOMY_EGG_JOKES);
+  elements.economyEggToast.textContent = ECONOMY_EGG_MESSAGE;
 
   if (economyEggToastTimer) {
     window.clearTimeout(economyEggToastTimer);
@@ -1035,7 +1026,7 @@ function renderPairedTemperatureDeviationChart(rows, leftPeriod, rightPeriod, ba
           `;
         })
         .join("")}
-      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">기온 편차 (°C)</text>
+      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">°C</text>
     </svg>
   `;
 }
@@ -1083,7 +1074,7 @@ function renderPairedPrecipitationDeviationChart(rows, leftPeriod, rightPeriod, 
           `;
         })
         .join("")}
-      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">강수 편차 (mm)</text>
+      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">mm</text>
     </svg>
   `;
 }
@@ -1183,7 +1174,7 @@ function renderMonthlyTemperatureTrendChart(rows, sharedChartScale) {
           )
         )
         .join("")}
-      <text x="${margin.left}" y="12" font-size="11" fill="#111111" font-weight="700">기온 (°C)</text>
+      <text x="${margin.left}" y="12" font-size="11" fill="#111111" font-weight="700">°C</text>
     </svg>
   `;
 }
@@ -1237,7 +1228,7 @@ function renderCumulativePrecipitationTrendChart(rows) {
           renderTrendSeriesLine(item, index, margin, stepX, 0, yMax, margin.top + chartHeight, "#555555")
         )
         .join("")}
-      <text x="${margin.left}" y="12" font-size="11" fill="#555555" font-weight="700">누적 강수량 (mm)</text>
+      <text x="${margin.left}" y="12" font-size="11" fill="#555555" font-weight="700">mm</text>
     </svg>
   `;
 }

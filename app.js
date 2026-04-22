@@ -88,16 +88,7 @@ const HERO_MESSAGE_DARKS = [
   "내륙은 계절 기복을 숨길 생각이 없고, 해안은 바다 뒤에 숨어서 부드러운 척을 합니다.",
   "교과서에서는 기후가 차분해 보이지만, 그래프를 켜면 지역마다 성격이 꽤 험합니다.",
 ];
-const ECONOMY_EGG_JOKES = [
-  "경제지리 속보: 입지가 좋은 농담은 아직 시장 접근성을 확보하지 못했습니다.",
-  "공업 입지는 원료와 시장 사이에서 고민하고, 저는 드립과 자존심 사이에서 고민합니다.",
-  "집적경제는 친구를 많이 부르는데, 과밀은 늘 초대 안 했는데도 따라옵니다.",
-  "중심지 이론은 그럴듯한데, 시험장에 가면 늘 제 기억만 주변지로 밀려납니다.",
-  "항만도시는 배가 들어와 성장하고, 이 농담은 들어와도 부가가치가 거의 없습니다.",
-  "오늘의 경제지리 한마디: 베버는 운송비를 줄였는데 제 웃음 손실은 줄이지 못했습니다.",
-  "입지 삼각형은 삼각형인데, 막상 문제를 풀면 체감은 미로에 더 가깝습니다.",
-  "CBD는 도심의 중심인데, 이 농담의 중심은 아직 찾는 중입니다.",
-];
+const ECONOMY_EGG_MESSAGE = "<준비중입니다>";
 const HERO_MESSAGE_OPENERS = [
   "비슷한 위도끼리 모아 놔도,",
   "지도에서 멀어 보이는 도시들도,",
@@ -754,7 +745,7 @@ function showEconomyEggToast() {
   }
 
   elements.economyEggToast.hidden = false;
-  elements.economyEggToast.textContent = pickRandomItem(ECONOMY_EGG_JOKES);
+  elements.economyEggToast.textContent = ECONOMY_EGG_MESSAGE;
 
   if (economyEggToastTimer) {
     window.clearTimeout(economyEggToastTimer);
@@ -1978,7 +1969,7 @@ function renderMonthlyTemperatureTrendChart(selectedRegions, sharedChartScale) {
           )
         )
         .join("")}
-      <text x="${margin.left}" y="12" font-size="11" fill="${COLORS.temperature}" font-weight="700">기온 (°C)</text>
+      <text x="${margin.left}" y="12" font-size="11" fill="${COLORS.temperature}" font-weight="700">°C</text>
     </svg>
   `;
 }
@@ -2042,7 +2033,7 @@ function renderCumulativePrecipitationTrendChart(selectedRegions) {
           renderTrendSeriesLine(series, index, margin, stepX, 0, yMax, margin.top + chartHeight, COLORS.rain)
         )
         .join("")}
-      <text x="${margin.left}" y="12" font-size="11" fill="${COLORS.rain}" font-weight="700">누적 강수량 (mm)</text>
+      <text x="${margin.left}" y="12" font-size="11" fill="${COLORS.rain}" font-weight="700">mm</text>
     </svg>
   `;
 }
@@ -2283,7 +2274,7 @@ function renderDeviationTemperatureChart(rows) {
       <line x1="${width - margin.right}" y1="${margin.top}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="${COLORS.grid}" />
       <line x1="${margin.left}" y1="${margin.top + chartHeight}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="${COLORS.grid}" />
       ${points}
-      <text x="${margin.left}" y="14" font-size="11" fill="${COLORS.ink}" font-weight="700">기온 편차 (°C)</text>
+      <text x="${margin.left}" y="14" font-size="11" fill="${COLORS.ink}" font-weight="700">°C</text>
     </svg>
   `;
 }
@@ -2358,7 +2349,7 @@ function renderDeviationPrecipitationChart(rows) {
       <line x1="${width - margin.right}" y1="${margin.top}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="${COLORS.grid}" />
       <line x1="${margin.left}" y1="${margin.top + chartHeight}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="${COLORS.grid}" />
       ${bars}
-      <text x="${margin.left}" y="14" font-size="11" fill="${COLORS.ink}" font-weight="700">강수 편차 (mm)</text>
+      <text x="${margin.left}" y="14" font-size="11" fill="${COLORS.ink}" font-weight="700">mm</text>
     </svg>
   `;
 }
