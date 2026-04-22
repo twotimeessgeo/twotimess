@@ -33,6 +33,10 @@ const COMPARISON_PAIR_CONFIGS = [
   },
 ];
 
+const RANDOM_SELECTION_SIZE = 4;
+const RANDOM_SELECTION_ATTEMPTS = 200;
+const RANDOM_SELECTION_MIN_DISTANCE_STEPS = [110, 90, 75, 60];
+
 const collator = new Intl.Collator("ko-KR", { numeric: true, sensitivity: "base" });
 const numberFormatter = new Intl.NumberFormat("ko-KR");
 const coordinateFormatter = new Intl.NumberFormat("ko-KR", {
@@ -47,6 +51,7 @@ const state = {
   nation: "전체",
   zone: "전체",
   mapScope: "all",
+  comparisonBaseline: "mean",
   selectedIds: new Set(),
 };
 
@@ -55,6 +60,7 @@ const elements = {
   heroCaption: document.querySelector("#heroCaption"),
   selectionSummary: document.querySelector("#selectionSummary"),
   searchInput: document.querySelector("#searchInput"),
+  randomSpacedSelectionButton: document.querySelector("#randomSpacedSelectionButton"),
   clearSelectionButton: document.querySelector("#clearSelectionButton"),
   nationChips: document.querySelector("#nationChips"),
   zoneChips: document.querySelector("#zoneChips"),
@@ -88,8 +94,13 @@ function bindEvents() {
     render();
   });
 
+  elements.randomSpacedSelectionButton?.addEventListener("click", () => {
+    applyRandomSpacedSelection();
+  });
+
   elements.clearSelectionButton?.addEventListener("click", () => {
     state.selectedIds.clear();
+    state.comparisonBaseline = "mean";
     render();
   });
 
@@ -143,6 +154,15 @@ function bindEvents() {
     }
     toggleSelection(marker.dataset.mapRegionId);
   });
+
+  elements.comparisonContent?.addEventListener("change", (event) => {
+    const select = event.target.closest("[data-baseline-select]");
+    if (!select) {
+      return;
+    }
+    state.comparisonBaseline = select.value || "mean";
+    render();
+  });
 }
 
 function applyDefaultSelection() {
@@ -161,9 +181,84 @@ function toggleSelection(regionId) {
   render();
 }
 
+function applyRandomSpacedSelection() {
+  const candidates = state.regions.filter(hasCoordinates);
+  if (candidates.length < RANDOM_SELECTION_SIZE) {
+    return;
+  }
+
+  const pickedRegions = findSpacedSelection(candidates, RANDOM_SELECTION_SIZE);
+  if (!pickedRegions.length) {
+    return;
+  }
+
+  state.search = "";
+  state.nation = "전체";
+  state.zone = "전체";
+  state.mapScope = "selected";
+  state.comparisonBaseline = "mean";
+  state.selectedIds = new Set(pickedRegions.map((region) => region.id));
+
+  if (elements.searchInput) {
+    elements.searchInput.value = "";
+  }
+
+  render();
+}
+
+function findSpacedSelection(candidates, selectionSize) {
+  for (const minDistanceKm of RANDOM_SELECTION_MIN_DISTANCE_STEPS) {
+    const validSelections = [];
+
+    for (let attemptIndex = 0; attemptIndex < RANDOM_SELECTION_ATTEMPTS; attemptIndex += 1) {
+      const picked = [];
+      const shuffledCandidates = shuffleArray(candidates);
+
+      shuffledCandidates.forEach((candidate) => {
+        if (
+          picked.length < selectionSize &&
+          picked.every(
+            (selectedRegion) =>
+              calculateDistanceKm(selectedRegion.coordinates, candidate.coordinates) >= minDistanceKm
+          )
+        ) {
+          picked.push(candidate);
+        }
+      });
+
+      if (picked.length === selectionSize) {
+        validSelections.push(picked);
+      }
+    }
+
+    if (validSelections.length > 0) {
+      return validSelections[Math.floor(Math.random() * validSelections.length)];
+    }
+  }
+
+  return shuffleArray(candidates).slice(0, selectionSize);
+}
+
+function hasCoordinates(region) {
+  return (
+    typeof region.coordinates?.latitude === "number" && typeof region.coordinates?.longitude === "number"
+  );
+}
+
+function normalizeComparisonBaseline(selectedRegions) {
+  if (state.comparisonBaseline === "mean") {
+    return;
+  }
+
+  if (!selectedRegions.some((region) => region.id === state.comparisonBaseline)) {
+    state.comparisonBaseline = "mean";
+  }
+}
+
 function render() {
   const visibleRegions = getVisibleRegions();
   const selectedRegions = getSelectedRegions();
+  normalizeComparisonBaseline(selectedRegions);
 
   if (elements.heroCount) {
     elements.heroCount.textContent = `${state.dataset.summary.regionCount}개 지역`;
@@ -320,10 +415,26 @@ function renderSelectedRegions(regions) {
     );
   }
 
-  return regions.map((region) => renderRegionCard(region)).join("");
+  const sharedChartScale = buildClimateChartScale(regions);
+  return regions.map((region) => renderRegionCard(region, sharedChartScale)).join("");
 }
 
-function renderRegionCard(region) {
+function buildClimateChartScale(regions) {
+  const temperatureValues = regions.flatMap((region) => region.monthlyTemperatureC);
+  const precipitationValues = regions.flatMap((region) => region.monthlyPrecipitationMm);
+  const precipitationStep = pickPrecipitationStep(Math.max(...precipitationValues));
+  const tempMinValue = Math.min(...temperatureValues);
+  const tempMaxValue = Math.max(...temperatureValues);
+  const temperatureStep = pickTemperatureStep(tempMaxValue - tempMinValue);
+
+  return {
+    precipitationMax: niceCeil(Math.max(...precipitationValues), precipitationStep),
+    temperatureMin: niceFloor(tempMinValue - temperatureStep, temperatureStep),
+    temperatureMax: niceCeil(tempMaxValue + temperatureStep, temperatureStep),
+  };
+}
+
+function renderRegionCard(region, sharedChartScale) {
   const periodMetrics = state.dataset.comparisonPeriods.map((period) => getPeriodMetrics(region, period));
   const annualRange = getAnnualTemperatureRange(region);
 
@@ -381,7 +492,7 @@ function renderRegionCard(region) {
       <div class="region-card-chart">
         <div class="chart-card">
           <h4>연중 기온·강수량</h4>
-          ${renderClimateChart(region)}
+          ${renderClimateChart(region, sharedChartScale)}
           <p class="chart-caption">회색 막대는 강수량, 검은 선은 평균 기온입니다.</p>
         </div>
       </div>
@@ -405,8 +516,27 @@ function renderComparison(regions) {
   const periodLookup = Object.fromEntries(
     state.dataset.comparisonPeriods.map((period) => [period.id, period])
   );
+  const baseline = resolveComparisonBaseline(rows);
 
   return `
+    <div class="comparison-controls">
+      <p>편차 기준을 선택 지역 평균이나 특정 지점으로 바꿔, 각 지역이 어느 기준보다 높고 낮은지 바로 볼 수 있습니다.</p>
+      <label class="comparison-select">
+        <span>편차 기준</span>
+        <select data-baseline-select aria-label="편차 기준">
+          <option value="mean" ${baseline.mode === "mean" ? "selected" : ""}>선택 지역 평균</option>
+          ${rows
+            .map(
+              (row) => `
+                <option value="${row.region.id}" ${baseline.mode === "region" && baseline.row.region.id === row.region.id ? "selected" : ""}>
+                  ${row.symbol} ${escapeHtml(row.region.name)}
+                </option>
+              `
+            )
+            .join("")}
+        </select>
+      </label>
+    </div>
     <div class="table-wrap">
       <table>
         <thead>
@@ -456,14 +586,17 @@ function renderComparison(regions) {
         )
         .join("")}
     </div>
+    <p class="formula-note">현재 편차 기준: ${escapeHtml(baseline.label)}. 편차 = 해당 지점 값 - ${escapeHtml(
+    baseline.formulaLabel
+  )}${baseline.mode === "region" ? " · 기준 지점은 편차 그래프에서 제외됩니다." : ""}</p>
     <div class="comparison-pair-grid">
       ${COMPARISON_PAIR_CONFIGS.map((pair) => {
         const leftPeriod = periodLookup[pair.leftPeriodId];
         const rightPeriod = periodLookup[pair.rightPeriodId];
         return `
           <div class="chart-card">
-            <h4>${escapeHtml(pair.title)} 평균 기온 편차</h4>
-            ${renderPairedTemperatureDeviationChart(rows, leftPeriod, rightPeriod)}
+            <h4>${escapeHtml(pair.title)} 기온 편차</h4>
+            ${renderPairedTemperatureDeviationChart(rows, leftPeriod, rightPeriod, baseline)}
             ${renderSeriesLegend([
               { label: leftPeriod.label, style: pair.leftStyle },
               { label: rightPeriod.label, style: pair.rightStyle },
@@ -471,7 +604,7 @@ function renderComparison(regions) {
           </div>
           <div class="chart-card">
             <h4>${escapeHtml(pair.title)} 강수량 편차</h4>
-            ${renderPairedPrecipitationDeviationChart(rows, leftPeriod, rightPeriod)}
+            ${renderPairedPrecipitationDeviationChart(rows, leftPeriod, rightPeriod, baseline)}
             ${renderSeriesLegend([
               { label: leftPeriod.label, style: pair.leftBarStyle },
               { label: rightPeriod.label, style: pair.rightBarStyle },
@@ -551,7 +684,7 @@ function renderMap(visibleRegions, selectedRegions) {
       </svg>
       <div class="world-map-overlay">
         <span class="map-overlay-pill">Natural Earth 10m</span>
-        <span class="map-overlay-pill">한반도 집중 세로형 지도</span>
+        <span class="map-overlay-pill">세로형 확대 보기</span>
         <span class="map-overlay-pill">기상청 지점정보 좌표</span>
       </div>
       <div class="world-map-markers">${markers}</div>
@@ -570,6 +703,24 @@ function buildComparisonRows(symbols) {
   }));
 }
 
+function resolveComparisonBaseline(rows) {
+  const baselineRow = rows.find((row) => row.region.id === state.comparisonBaseline);
+  if (!baselineRow) {
+    return {
+      mode: "mean",
+      label: "선택 지역 평균",
+      formulaLabel: "선택 지역 평균값",
+    };
+  }
+
+  return {
+    mode: "region",
+    row: baselineRow,
+    label: `${baselineRow.symbol} ${baselineRow.region.name}`,
+    formulaLabel: `${baselineRow.region.name} 값`,
+  };
+}
+
 function getPeriodMetrics(region, period) {
   const monthIndexes = period.monthIndexes;
   return {
@@ -586,21 +737,17 @@ function getAnnualTemperatureRange(region) {
   return round(region.monthlyTemperatureC[7] - region.monthlyTemperatureC[0]);
 }
 
-function renderClimateChart(region) {
+function renderClimateChart(region, sharedChartScale = null) {
   const width = 460;
   const height = 300;
   const margin = { top: 18, right: 50, bottom: 40, left: 48 };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
   const monthCount = region.months.length;
-  const maxPrecipitation = Math.max(...region.monthlyPrecipitationMm);
-  const precipitationStep = pickPrecipitationStep(maxPrecipitation);
-  const precipitationMax = niceCeil(maxPrecipitation, precipitationStep);
-  const tempMinValue = Math.min(...region.monthlyTemperatureC);
-  const tempMaxValue = Math.max(...region.monthlyTemperatureC);
-  const temperatureStep = pickTemperatureStep(tempMaxValue - tempMinValue);
-  const temperatureMin = niceFloor(tempMinValue - temperatureStep, temperatureStep);
-  const temperatureMax = niceCeil(tempMaxValue + temperatureStep, temperatureStep);
+  const chartScale = sharedChartScale ?? buildClimateChartScale([region]);
+  const precipitationMax = chartScale.precipitationMax;
+  const temperatureMin = chartScale.temperatureMin;
+  const temperatureMax = chartScale.temperatureMax;
   const tickCount = 5;
   const stepX = chartWidth / monthCount;
   const barWidth = stepX * 0.54;
@@ -627,6 +774,7 @@ function renderClimateChart(region) {
     <svg class="svg-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(
       region.name
     )}의 월별 기온과 강수량 그래프">
+      <rect x="${margin.left}" y="${margin.top}" width="${chartWidth}" height="${chartHeight}" fill="#ffffff" stroke="#d7d7d7"></rect>
       ${horizontalTicks
         .map(
           (tick) => `
@@ -673,13 +821,13 @@ function renderClimateChart(region) {
   `;
 }
 
-function renderPairedTemperatureDeviationChart(rows, leftPeriod, rightPeriod) {
+function renderPairedTemperatureDeviationChart(rows, leftPeriod, rightPeriod, baseline) {
   const width = 420;
   const height = 250;
   const margin = { top: 18, right: 16, bottom: 52, left: 44 };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
-  const pairedRows = buildPairedDeviationRows(rows, leftPeriod.id, rightPeriod.id, "temperature");
+  const pairedRows = buildPairedDeviationRows(rows, leftPeriod.id, rightPeriod.id, "temperature", baseline);
   const maxAbs = Math.max(...pairedRows.flatMap((row) => [Math.abs(row.leftDeviation), Math.abs(row.rightDeviation)]), 1);
   const step = pickDeviationTemperatureStep(maxAbs);
   const axisBound = niceCeil(maxAbs, step);
@@ -715,13 +863,13 @@ function renderPairedTemperatureDeviationChart(rows, leftPeriod, rightPeriod) {
   `;
 }
 
-function renderPairedPrecipitationDeviationChart(rows, leftPeriod, rightPeriod) {
+function renderPairedPrecipitationDeviationChart(rows, leftPeriod, rightPeriod, baseline) {
   const width = 420;
   const height = 250;
   const margin = { top: 18, right: 16, bottom: 52, left: 46 };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
-  const pairedRows = buildPairedDeviationRows(rows, leftPeriod.id, rightPeriod.id, "precipitation");
+  const pairedRows = buildPairedDeviationRows(rows, leftPeriod.id, rightPeriod.id, "precipitation", baseline);
   const maxAbs = Math.max(...pairedRows.flatMap((row) => [Math.abs(row.leftDeviation), Math.abs(row.rightDeviation)]), 20);
   const step = pickDeviationPrecipitationStep(maxAbs);
   const axisBound = niceCeil(maxAbs, step);
@@ -801,13 +949,23 @@ function renderAnnualRangeChart(rows) {
   `;
 }
 
-function buildPairedDeviationRows(rows, leftPeriodId, rightPeriodId, key) {
-  const leftAverage = average(rows.map((row) => row.metrics[leftPeriodId][key]));
-  const rightAverage = average(rows.map((row) => row.metrics[rightPeriodId][key]));
-  return rows.map((row) => ({
+function buildPairedDeviationRows(rows, leftPeriodId, rightPeriodId, key, baseline) {
+  const comparableRows =
+    baseline.mode === "region"
+      ? rows.filter((row) => row.region.id !== baseline.row.region.id)
+      : rows;
+  const leftReference =
+    baseline.mode === "region"
+      ? baseline.row.metrics[leftPeriodId][key]
+      : average(rows.map((row) => row.metrics[leftPeriodId][key]));
+  const rightReference =
+    baseline.mode === "region"
+      ? baseline.row.metrics[rightPeriodId][key]
+      : average(rows.map((row) => row.metrics[rightPeriodId][key]));
+  return comparableRows.map((row) => ({
     symbol: row.symbol,
-    leftDeviation: round(row.metrics[leftPeriodId][key] - leftAverage),
-    rightDeviation: round(row.metrics[rightPeriodId][key] - rightAverage),
+    leftDeviation: round(row.metrics[leftPeriodId][key] - leftReference),
+    rightDeviation: round(row.metrics[rightPeriodId][key] - rightReference),
   }));
 }
 
@@ -951,7 +1109,7 @@ function formatPlainNumber(value) {
 }
 
 function formatSignedPlain(value) {
-  return `${value > 0 ? "+" : ""}${formatPlainNumber(value)}`;
+  return formatPlainNumber(value);
 }
 
 function average(values) {
@@ -964,6 +1122,31 @@ function sum(values) {
 
 function round(value) {
   return Number(Number(value).toFixed(1));
+}
+
+function calculateDistanceKm(from, to) {
+  const earthRadiusKm = 6371;
+  const lat1 = toRadians(from.latitude);
+  const lat2 = toRadians(to.latitude);
+  const deltaLat = toRadians(to.latitude - from.latitude);
+  const deltaLon = toRadians(to.longitude - from.longitude);
+  const haversine =
+    Math.sin(deltaLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLon / 2) ** 2;
+  return earthRadiusKm * 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
+}
+
+function toRadians(value) {
+  return (value * Math.PI) / 180;
+}
+
+function shuffleArray(values) {
+  const copy = [...values];
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
+  }
+  return copy;
 }
 
 function escapeHtml(value) {
