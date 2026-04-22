@@ -1759,13 +1759,16 @@ function renderComparison(selectedRegions) {
         <h4>월 평균 기온</h4>
         ${renderMonthlyTemperatureTrendChart(selectedRegions, sharedChartScale)}
         ${renderTrendLegend(selectedRegions, COLORS.temperature)}
-        <p class="formula-note">* 선택한 지역 전체에 같은 기온 축을 적용했습니다.</p>
+        ${renderFootnoteLines(["선택한 지역 전체에 같은 기온 축을 적용했습니다."])}
       </article>
       <article class="chart-card world-trend-card">
         <h4>누적 강수량</h4>
         ${renderCumulativePrecipitationTrendChart(selectedRegions)}
         ${renderTrendLegend(selectedRegions, COLORS.rain)}
-        <p class="formula-note">* 누적 강수량은 1월부터 해당 월까지의 강수량 합입니다.<br />** 선택한 지역 전체에 같은 강수 축을 적용했습니다.</p>
+        ${renderFootnoteLines([
+          "누적 강수량은 1월부터 해당 월까지의 강수량 합입니다.",
+          "선택한 지역 전체에 같은 강수 축을 적용했습니다.",
+        ])}
       </article>
     </div>
   `;
@@ -1870,14 +1873,12 @@ function renderMonthPanel(selectedRegions, monthIndex, panelIndex, baseline) {
           ${renderDeviationPrecipitationChart(chartRows)}
         </article>
       </div>
-      <p class="formula-note">
-        * 현재 기준: ${escapeHtml(baseline.label)}
-        <br />
-        ** 평균 기온 차이 = 해당 지역 기온 − ${escapeHtml(baseline.formulaLabel)}
-        <br />
-        ** 강수량 차이 = 해당 지역 강수량 − ${escapeHtml(baseline.formulaLabel)}
-        ${baseline.mode === "region" ? "<br />** 기준 지역은 편차 그래프에서 제외했습니다." : ""}
-      </p>
+      ${renderFootnoteLines([
+        `현재 기준: ${baseline.label}`,
+        `평균 기온 차이 = 해당 지역 기온 − ${baseline.formulaLabel}`,
+        `강수량 차이 = 해당 지역 강수량 − ${baseline.formulaLabel}`,
+        baseline.mode === "region" ? "기준 지역은 편차 그래프에서 제외했습니다." : "",
+      ])}
     </article>
   `;
 }
@@ -3063,6 +3064,13 @@ function formatSigned(value, unit) {
 
 function formatSignedPlain(value) {
   return numberFormatter.format(round(value));
+}
+
+function renderFootnoteLines(lines, className = "formula-note") {
+  const visibleLines = lines.filter(Boolean);
+  return `<p class="${className}">${visibleLines
+    .map((line, index) => `${index > 0 ? "<br />" : ""}${"*".repeat(index + 1)} ${escapeHtml(line)}`)
+    .join("")}</p>`;
 }
 
 function escapeHtml(value) {

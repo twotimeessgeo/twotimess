@@ -720,21 +720,26 @@ function renderComparison(regions) {
         </tbody>
       </table>
     </div>
-    <p class="formula-note">* 현재 편차 기준: ${escapeHtml(baseline.label)}.<br />** 편차 = 해당 지점 값 - ${escapeHtml(
-      baseline.formulaLabel
-    )}${baseline.mode === "region" ? " · 기준 지점은 편차 그래프에서 제외됩니다." : ""}</p>
+    ${renderFootnoteLines([
+      `현재 편차 기준: ${baseline.label}.`,
+      `편차 = 해당 지점 값 - ${baseline.formulaLabel}`,
+      baseline.mode === "region" ? "기준 지점은 편차 그래프에서 제외됩니다." : "",
+    ])}
     <div class="charts-grid">
       <article class="chart-card world-trend-card">
         <h4>월 평균 기온</h4>
         ${renderMonthlyTemperatureTrendChart(rows, sharedChartScale)}
         ${renderTrendLegend(rows, "#111111")}
-        <p class="formula-note">* 선택된 지점 전체에 같은 기온 축을 적용했습니다.</p>
+        ${renderFootnoteLines(["선택된 지점 전체에 같은 기온 축을 적용했습니다."])}
       </article>
       <article class="chart-card world-trend-card">
         <h4>누적 강수량</h4>
         ${renderCumulativePrecipitationTrendChart(rows)}
         ${renderTrendLegend(rows, "#555555")}
-        <p class="formula-note">* 누적 강수량은 1월부터 해당 월까지의 강수량 합입니다.<br />** 선택된 지점 전체에 같은 강수 축을 적용했습니다.</p>
+        ${renderFootnoteLines([
+          "누적 강수량은 1월부터 해당 월까지의 강수량 합입니다.",
+          "선택된 지점 전체에 같은 강수 축을 적용했습니다.",
+        ])}
       </article>
     </div>
     <div class="comparison-pair-grid">
@@ -763,7 +768,7 @@ function renderComparison(regions) {
       <div class="chart-card is-wide">
         <h4>연교차 비교</h4>
         ${renderAnnualRangeChart(rows)}
-        <p class="formula-note">* 연교차는 8월 평균기온에서 1월 평균기온을 뺀 값입니다.</p>
+        ${renderFootnoteLines(["연교차는 8월 평균기온에서 1월 평균기온을 뺀 값입니다."])}
       </div>
     </div>
   `;
@@ -1498,6 +1503,13 @@ function formatPlainNumber(value) {
 
 function formatSignedPlain(value) {
   return formatPlainNumber(value);
+}
+
+function renderFootnoteLines(lines, className = "formula-note") {
+  const visibleLines = lines.filter(Boolean);
+  return `<p class="${className}">${visibleLines
+    .map((line, index) => `${index > 0 ? "<br />" : ""}${"*".repeat(index + 1)} ${escapeHtml(line)}`)
+    .join("")}</p>`;
 }
 
 function average(values) {
