@@ -1,0 +1,252 @@
+{
+  "카두나": {
+    "englishName": "Kaduna",
+    "aliases": ["Kaduna"],
+    "coordinates": { "latitude": 10.5222, "longitude": 7.4383 },
+    "mapOffset": { "x": -6, "y": 8 }
+  },
+  "하르툼": {
+    "englishName": "Khartoum",
+    "aliases": ["Khartoum"],
+    "coordinates": { "latitude": 15.5007, "longitude": 32.5599 },
+    "mapOffset": { "x": 12, "y": -6 }
+  },
+  "케이프타운": {
+    "englishName": "Cape Town",
+    "aliases": ["Cape Town"],
+    "coordinates": { "latitude": -33.9249, "longitude": 18.4241 }
+  },
+  "아디스아바바": {
+    "englishName": "Addis Ababa",
+    "aliases": ["Addis Ababa"],
+    "coordinates": { "latitude": 8.9806, "longitude": 38.7578 },
+    "mapOffset": { "x": 16, "y": 12 }
+  },
+  "브라질리아": {
+    "englishName": "Brasilia",
+    "aliases": ["Brasilia", "Brasília"],
+    "coordinates": { "latitude": -15.7939, "longitude": -47.8828 },
+    "mapOffset": { "x": 18, "y": 16 }
+  },
+  "카라카스": {
+    "englishName": "Caracas",
+    "aliases": ["Caracas"],
+    "coordinates": { "latitude": 10.4806, "longitude": -66.9036 },
+    "mapOffset": { "x": 16, "y": -10 }
+  },
+  "리마": {
+    "englishName": "Lima",
+    "aliases": ["Lima"],
+    "coordinates": { "latitude": -12.0464, "longitude": -77.0428 },
+    "mapOffset": { "x": -10, "y": 2 }
+  },
+  "토코피야": {
+    "englishName": "Tocopilla",
+    "aliases": ["Tocopilla"],
+    "coordinates": { "latitude": -22.092, "longitude": -70.1979 },
+    "mapOffset": { "x": -16, "y": -8 }
+  },
+  "우수아이아": {
+    "englishName": "Ushuaia",
+    "aliases": ["Ushuaia"],
+    "coordinates": { "latitude": -54.8019, "longitude": -68.303 },
+    "mapOffset": { "x": 8, "y": 20 }
+  },
+  "카스트로": {
+    "englishName": "Castro",
+    "aliases": ["Castro"],
+    "coordinates": { "latitude": -42.4806, "longitude": -73.7622 },
+    "mapOffset": { "x": 0, "y": 22 }
+  },
+  "샌프란시스코": {
+    "englishName": "San Francisco",
+    "aliases": ["San Francisco"],
+    "coordinates": { "latitude": 37.7749, "longitude": -122.4194 },
+    "mapOffset": { "x": -12, "y": 2 }
+  },
+  "몬트리올": {
+    "englishName": "Montreal",
+    "aliases": ["Montreal", "Montréal"],
+    "coordinates": { "latitude": 45.5019, "longitude": -73.5674 },
+    "mapOffset": { "x": 16, "y": -14 }
+  },
+  "다윈": {
+    "englishName": "Darwin",
+    "aliases": ["Darwin"],
+    "coordinates": { "latitude": -12.4634, "longitude": 130.8456 }
+  },
+  "오클랜드": {
+    "englishName": "Auckland",
+    "aliases": ["Auckland"],
+    "coordinates": { "latitude": -36.8509, "longitude": 174.7645 },
+    "mapOffset": { "x": -10, "y": 6 }
+  },
+  "퍼스": {
+    "englishName": "Perth",
+    "aliases": ["Perth"],
+    "coordinates": { "latitude": -31.9523, "longitude": 115.8613 }
+  },
+  "싱가포르": {
+    "englishName": "Singapore",
+    "aliases": ["Singapore"],
+    "coordinates": { "latitude": 1.3521, "longitude": 103.8198 }
+  },
+  "양곤": {
+    "englishName": "Yangon",
+    "aliases": ["Yangon", "Rangoon"],
+    "coordinates": { "latitude": 16.8661, "longitude": 96.1951 },
+    "mapOffset": { "x": -4, "y": 10 }
+  },
+  "테헤란": {
+    "englishName": "Tehran",
+    "aliases": ["Tehran"],
+    "coordinates": { "latitude": 35.6892, "longitude": 51.389 },
+    "mapOffset": { "x": 10, "y": 6 }
+  },
+  "상하이": {
+    "englishName": "Shanghai",
+    "aliases": ["Shanghai"],
+    "coordinates": { "latitude": 31.2304, "longitude": 121.4737 },
+    "mapOffset": { "x": 6, "y": 14 }
+  },
+  "런던": {
+    "englishName": "London",
+    "aliases": ["London"],
+    "coordinates": { "latitude": 51.5072, "longitude": -0.1276 },
+    "mapOffset": { "x": -12, "y": 2 }
+  },
+  "암스테르담": {
+    "englishName": "Amsterdam",
+    "aliases": ["Amsterdam"],
+    "coordinates": { "latitude": 52.3676, "longitude": 4.9041 },
+    "mapOffset": { "x": 12, "y": -10 }
+  },
+  "파리": {
+    "englishName": "Paris",
+    "aliases": ["Paris"],
+    "coordinates": { "latitude": 48.8566, "longitude": 2.3522 },
+    "mapOffset": { "x": 4, "y": 12 }
+  },
+  "로마": {
+    "englishName": "Rome",
+    "aliases": ["Rome", "Roma"],
+    "coordinates": { "latitude": 41.9028, "longitude": 12.4964 },
+    "mapOffset": { "x": 16, "y": 4 }
+  },
+  "마르세유": {
+    "englishName": "Marseille",
+    "aliases": ["Marseille"],
+    "coordinates": { "latitude": 43.2965, "longitude": 5.3698 },
+    "mapOffset": { "x": -4, "y": 18 }
+  },
+  "아테네": {
+    "englishName": "Athens",
+    "aliases": ["Athens"],
+    "coordinates": { "latitude": 37.9838, "longitude": 23.7275 },
+    "mapOffset": { "x": 18, "y": 10 }
+  },
+  "이스탄불": {
+    "englishName": "Istanbul",
+    "aliases": ["Istanbul", "İstanbul"],
+    "coordinates": { "latitude": 41.0082, "longitude": 28.9784 },
+    "mapOffset": { "x": 22, "y": -6 }
+  },
+  "칭다오": {
+    "englishName": "Qingdao",
+    "aliases": ["Qingdao", "Tsingtao"],
+    "coordinates": { "latitude": 36.0671, "longitude": 120.3826 },
+    "mapOffset": { "x": 18, "y": -6 }
+  },
+  "모스크바": {
+    "englishName": "Moscow",
+    "aliases": ["Moscow"],
+    "coordinates": { "latitude": 55.7558, "longitude": 37.6173 },
+    "mapOffset": { "x": 18, "y": 6 }
+  },
+  "베이징": {
+    "englishName": "Beijing",
+    "aliases": ["Beijing", "Peking"],
+    "coordinates": { "latitude": 39.9042, "longitude": 116.4074 },
+    "mapOffset": { "x": -14, "y": -12 }
+  },
+  "하바롭스크": {
+    "englishName": "Khabarovsk",
+    "aliases": ["Khabarovsk", "Habarovsk"],
+    "coordinates": { "latitude": 48.4802, "longitude": 135.0719 },
+    "mapOffset": { "x": 24, "y": -18 }
+  },
+  "바르셀로나": {
+    "mapOffset": { "x": -14, "y": 16 }
+  },
+  "상트페테르부르크": {
+    "mapOffset": { "x": 18, "y": -14 }
+  },
+  "다카": {
+    "mapOffset": { "x": 10, "y": -2 }
+  },
+  "홍콩": {
+    "mapOffset": { "x": 18, "y": 18 }
+  },
+  "블라디보스토크": {
+    "mapOffset": { "x": 22, "y": -8 }
+  },
+  "멕시코시티": {
+    "mapOffset": { "x": -12, "y": -8 }
+  },
+  "보고타": {
+    "mapOffset": { "x": 14, "y": 10 }
+  },
+  "이키토스": {
+    "mapOffset": { "x": 10, "y": -10 }
+  },
+  "산티아고": {
+    "mapOffset": { "x": -6, "y": 12 }
+  },
+  "콘셉시온": {
+    "mapOffset": { "x": 2, "y": 20 }
+  },
+  "리치먼드": {
+    "mapOffset": { "x": 18, "y": -8 }
+  },
+  "벨렘": {
+    "mapOffset": { "x": 18, "y": 6 }
+  },
+  "쿠이아바": {
+    "mapOffset": { "x": 12, "y": 16 }
+  },
+  "트렐류": {
+    "mapOffset": { "x": 10, "y": 12 }
+  },
+  "틱시": {
+    "mapOffset": { "x": 10, "y": -18 }
+  },
+  "보도": {
+    "mapOffset": { "x": -12, "y": -14 }
+  },
+  "딕슨": {
+    "mapOffset": { "x": 0, "y": -18 }
+  },
+  "배로": {
+    "mapOffset": { "x": -6, "y": -14 }
+  },
+  "헨더슨": {
+    "mapOffset": { "x": -12, "y": 10 }
+  },
+  "위치토": {
+    "mapOffset": { "x": 10, "y": 12 }
+  },
+  "푸앵트누아르": {
+    "mapOffset": { "x": -8, "y": 10 }
+  },
+  "키시와니": {
+    "mapOffset": { "x": 16, "y": 20 }
+  },
+  "라파스": {
+    "mapOffset": { "x": 10, "y": 12 }
+  },
+  "서밋캠프": {
+    "englishName": "Summit Camp",
+    "aliases": ["Summit Camp", "Summit Station"],
+    "mapOffset": { "x": 14, "y": -20 }
+  }
+}

@@ -1,0 +1,281 @@
+[
+  {
+    "name": "바르셀로나",
+    "englishName": "Barcelona",
+    "country": "Spain",
+    "continent": "유라시아",
+    "climateGroup": "Cs",
+    "wmoCityId": 1232,
+    "aliases": ["Barcelona"]
+  },
+  {
+    "name": "상트페테르부르크",
+    "englishName": "St. Petersburg",
+    "country": "Russian Federation",
+    "continent": "유라시아",
+    "climateGroup": "Df",
+    "wmoCityId": 203,
+    "aliases": ["Saint Petersburg", "St. Petersburg"]
+  },
+  {
+    "name": "리야드",
+    "englishName": "Riyadh",
+    "country": "Saudi Arabia",
+    "continent": "유라시아",
+    "climateGroup": "Bw",
+    "wmoCityId": 216,
+    "aliases": ["Riyadh"]
+  },
+  {
+    "name": "이르쿠츠크",
+    "englishName": "Irkutsk",
+    "country": "Russian Federation",
+    "continent": "유라시아",
+    "climateGroup": "Dw",
+    "wmoCityId": 662,
+    "aliases": ["Irkutsk"]
+  },
+  {
+    "name": "치타",
+    "englishName": "Chita",
+    "country": "Russian Federation",
+    "continent": "유라시아",
+    "climateGroup": "Dw",
+    "wmoCityId": 1012,
+    "aliases": ["Chita"]
+  },
+  {
+    "name": "다카",
+    "englishName": "Dhaka",
+    "country": "Bangladesh",
+    "continent": "유라시아",
+    "climateGroup": "Aw",
+    "wmoCityId": 1163,
+    "aliases": ["Dhaka", "Dacca"]
+  },
+  {
+    "name": "홍콩",
+    "englishName": "Hong Kong",
+    "country": "Hong Kong, China",
+    "continent": "유라시아",
+    "climateGroup": "Cw",
+    "wmoCityId": 1,
+    "aliases": ["Hong Kong"]
+  },
+  {
+    "name": "블라디보스토크",
+    "englishName": "Vladivostok",
+    "country": "Russian Federation",
+    "continent": "유라시아",
+    "climateGroup": "Dw",
+    "wmoCityId": 664,
+    "aliases": ["Vladivostok"]
+  },
+  {
+    "name": "멕시코시티",
+    "englishName": "Mexico City",
+    "country": "Mexico",
+    "continent": "아메리카",
+    "climateGroup": "H",
+    "wmoCityId": 279,
+    "aliases": ["Mexico City", "Ciudad de Mexico"]
+  },
+  {
+    "name": "보고타",
+    "englishName": "Bogota",
+    "country": "Colombia",
+    "continent": "아메리카",
+    "climateGroup": "H",
+    "wmoCityId": 157,
+    "aliases": ["Bogota", "Bogotá"]
+  },
+  {
+    "name": "이키토스",
+    "englishName": "Iquitos",
+    "country": "Peru",
+    "continent": "아메리카",
+    "climateGroup": "Af",
+    "wmoCityId": 111,
+    "aliases": ["Iquitos"]
+  },
+  {
+    "name": "산티아고",
+    "englishName": "Santiago",
+    "country": "Chile",
+    "continent": "아메리카",
+    "climateGroup": "Cs",
+    "wmoCityId": 103,
+    "aliases": ["Santiago"]
+  },
+  {
+    "name": "콘셉시온",
+    "englishName": "Concepcion",
+    "country": "Chile",
+    "continent": "아메리카",
+    "climateGroup": "Cfb",
+    "wmoCityId": 2202,
+    "aliases": ["Concepcion", "Concepción"]
+  },
+  {
+    "name": "리치먼드",
+    "englishName": "Richmond",
+    "country": "United States of America",
+    "continent": "아메리카",
+    "climateGroup": "Cfa",
+    "wmoCityId": 816,
+    "aliases": ["Richmond", "Richmond, Virginia"]
+  },
+  {
+    "name": "벨렘",
+    "englishName": "Belem",
+    "country": "Brazil",
+    "continent": "아메리카",
+    "climateGroup": "Af",
+    "wmoCityId": 1061,
+    "aliases": ["Belem", "Belém"]
+  },
+  {
+    "name": "쿠이아바",
+    "englishName": "Cuiaba",
+    "country": "Brazil",
+    "continent": "아메리카",
+    "climateGroup": "Aw",
+    "wmoCityId": 1065,
+    "aliases": ["Cuiaba", "Cuiabá"]
+  },
+  {
+    "name": "트렐류",
+    "englishName": "Trelew",
+    "country": "Argentina",
+    "continent": "아메리카",
+    "climateGroup": "Bw",
+    "wmoCityId": 2208,
+    "aliases": ["Trelew"]
+  },
+  {
+    "name": "틱시",
+    "englishName": "Tiksi",
+    "country": "Russian Federation",
+    "continent": "유라시아",
+    "climateGroup": "ET",
+    "wmoCityId": 1040,
+    "aliases": ["Tiksi"]
+  },
+  {
+    "name": "보도",
+    "englishName": "Bodo",
+    "country": "Norway",
+    "continent": "유라시아",
+    "climateGroup": "Cfb",
+    "provider": "open-meteo",
+    "coordinates": {
+      "latitude": 67.2804,
+      "longitude": 14.4049
+    },
+    "aliases": ["Bodo", "Bodø"]
+  },
+  {
+    "name": "딕슨",
+    "englishName": "Dikson",
+    "country": "Russian Federation",
+    "continent": "유라시아",
+    "climateGroup": "ET",
+    "provider": "open-meteo",
+    "coordinates": {
+      "latitude": 73.5099,
+      "longitude": 80.5464
+    },
+    "aliases": ["Dikson", "Dixon"]
+  },
+  {
+    "name": "배로",
+    "englishName": "Barrow",
+    "country": "United States of America",
+    "continent": "아메리카",
+    "climateGroup": "ET",
+    "provider": "open-meteo",
+    "coordinates": {
+      "latitude": 71.2906,
+      "longitude": -156.7886
+    },
+    "aliases": ["Barrow", "Utqiagvik", "Utqiaġvik", "베로", "바로"]
+  },
+  {
+    "name": "헨더슨",
+    "englishName": "Henderson",
+    "country": "United States of America",
+    "continent": "아메리카",
+    "climateGroup": "Bw",
+    "provider": "open-meteo",
+    "coordinates": {
+      "latitude": 36.0395,
+      "longitude": -114.9817
+    },
+    "aliases": ["Henderson", "Henderson, Nevada"]
+  },
+  {
+    "name": "위치토",
+    "englishName": "Wichita",
+    "country": "United States of America",
+    "continent": "아메리카",
+    "climateGroup": "Cfa",
+    "provider": "open-meteo",
+    "coordinates": {
+      "latitude": 37.6872,
+      "longitude": -97.3301
+    },
+    "aliases": ["Wichita", "Wichita, Kansas"]
+  },
+  {
+    "name": "푸앵트누아르",
+    "englishName": "Pointe-Noire",
+    "country": "Republic of the Congo",
+    "continent": "아프리카",
+    "climateGroup": "Aw",
+    "provider": "open-meteo",
+    "coordinates": {
+      "latitude": -4.7889,
+      "longitude": 11.8635
+    },
+    "aliases": ["Pointe-Noire", "Pointe Noire"]
+  },
+  {
+    "name": "키시와니",
+    "englishName": "Kilwa Kisiwani",
+    "country": "United Republic of Tanzania",
+    "continent": "아프리카",
+    "climateGroup": "Aw",
+    "provider": "open-meteo",
+    "coordinates": {
+      "latitude": -8.9574,
+      "longitude": 39.5086
+    },
+    "aliases": ["Kilwa Kisiwani", "Kisiwani"]
+  },
+  {
+    "name": "라파스",
+    "englishName": "La Paz",
+    "country": "Bolivia",
+    "continent": "아메리카",
+    "climateGroup": "H",
+    "provider": "open-meteo",
+    "coordinates": {
+      "latitude": -16.4897,
+      "longitude": -68.1193
+    },
+    "aliases": ["La Paz"]
+  },
+  {
+    "name": "서밋캠프",
+    "englishName": "Summit Camp",
+    "country": "Greenland",
+    "continent": "아메리카",
+    "climateGroup": "EF",
+    "provider": "open-meteo",
+    "coordinates": {
+      "latitude": 72.5796,
+      "longitude": -38.4592
+    },
+    "aliases": ["Summit Camp", "Summit Station"]
+  }
+]
