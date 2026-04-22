@@ -17,6 +17,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 87.5%;
 }
 
 body {
@@ -30,9 +31,9 @@ body {
 }
 
 .page-shell {
-  width: min(1400px, calc(100vw - 40px));
+  width: min(1480px, calc(100vw - 28px));
   margin: 0 auto;
-  padding: 18px 0 36px;
+  padding: 14px 0 30px;
 }
 
 .hero,
@@ -46,9 +47,9 @@ body {
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.8fr) minmax(260px, 0.7fr);
-  gap: 32px;
+  gap: 26px;
   align-items: center;
-  padding: 36px 38px 34px;
+  padding: 28px 30px 26px;
 }
 
 .hero-copy {
@@ -117,15 +118,15 @@ body {
 
 .hero h1 {
   max-width: 11ch;
-  font-size: clamp(2.7rem, 4.5vw, 4.75rem);
+  font-size: clamp(2.45rem, 4.2vw, 4.25rem);
   line-height: 0.95;
 }
 
 .hero-text {
   max-width: 62ch;
-  margin: 18px 0 0;
+  margin: 14px 0 0;
   color: var(--muted);
-  line-height: 1.78;
+  line-height: 1.72;
 }
 
 .hero-note {
@@ -134,8 +135,8 @@ body {
   display: grid;
   align-content: center;
   gap: 6px;
-  width: min(100%, 320px);
-  padding: 24px 22px;
+  width: min(100%, 300px);
+  padding: 20px 18px;
   border: 1px solid var(--line);
   border-radius: var(--panel-radius);
   background: var(--panel-soft);
@@ -144,7 +145,7 @@ body {
 .hero-note strong {
   display: block;
   margin-bottom: 4px;
-  font-size: 2.2rem;
+  font-size: 1.95rem;
   line-height: 0.98;
   letter-spacing: -0.03em;
 }
@@ -156,20 +157,20 @@ body {
 
 .layout {
   display: grid;
-  gap: 24px;
-  margin-top: 20px;
+  gap: 18px;
+  margin-top: 16px;
 }
 
 .panel {
-  padding: 30px;
+  padding: 24px;
 }
 
 .section-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 22px;
+  gap: 18px;
+  margin-bottom: 18px;
 }
 
 .section-heading.compact {
@@ -190,8 +191,8 @@ body {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  min-height: 38px;
-  padding: 0 12px;
+  min-height: 34px;
+  padding: 0 10px;
   border: 1px solid var(--line);
   border-radius: 0;
   background: var(--ink);
@@ -209,7 +210,7 @@ body {
 .control-bar {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 14px;
+  gap: 12px;
   align-items: end;
 }
 
@@ -250,15 +251,15 @@ body {
 
 .filter-stack {
   display: grid;
-  gap: 16px;
-  margin-top: 20px;
+  gap: 14px;
+  margin-top: 16px;
 }
 
 .explore-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 24px;
-  margin-top: 22px;
+  gap: 18px;
+  margin-top: 18px;
 }
 
 .filter-group {
@@ -308,8 +309,8 @@ body {
 .region-picker,
 .api-stage {
   display: grid;
-  gap: 18px;
-  padding: 24px;
+  gap: 14px;
+  padding: 20px;
   border: 1px solid var(--line);
   border-radius: var(--panel-radius);
   background: #ffffff;
@@ -414,19 +415,24 @@ body {
 
 .selected-grid {
   display: grid;
-  gap: 18px;
+  gap: 16px;
 }
 
 .region-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.95fr);
-  gap: 20px;
-  align-items: start;
-  padding: 24px;
+  gap: 16px;
+  padding: 20px;
   border: 1px solid var(--line);
   border-radius: var(--panel-radius);
   background: #ffffff;
   animation: fadeUp 280ms ease both;
+}
+
+.region-card-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+  gap: 16px;
+  align-items: start;
 }
 
 .region-card-header {
@@ -443,23 +449,33 @@ body {
 
 .region-card-body {
   display: grid;
-  gap: 16px;
+  gap: 14px;
   min-width: 0;
   align-content: start;
 }
 
 .region-card-chart {
-  padding: 14px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 12px;
   min-width: 0;
-  align-self: start;
+  align-self: stretch;
   border: 1px solid var(--line);
   border-radius: var(--panel-radius);
   background: var(--panel-soft);
 }
 
+.region-card-table {
+  width: 100%;
+}
+
 .world-region-card {
-  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 420px);
-  gap: 18px;
+  gap: 14px;
+}
+
+.world-region-card .region-card-top {
+  grid-template-columns: minmax(0, 1.18fr) minmax(300px, 0.9fr);
 }
 
 .world-region-card .region-card-body {
@@ -479,9 +495,9 @@ body {
 
 .world-region-card .region-card-chart {
   width: 100%;
-  max-width: 420px;
+  max-width: none;
   padding: 10px 12px 12px;
-  justify-self: end;
+  justify-self: stretch;
 }
 
 .world-region-chart-frame {
@@ -523,7 +539,7 @@ table {
   width: 100%;
   min-width: 560px;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 thead th,
@@ -534,7 +550,7 @@ tfoot td {
 
 th,
 td {
-  padding: 10px 12px;
+  padding: 9px 11px;
   border-bottom: 1px solid var(--line-faint);
   text-align: right;
   white-space: nowrap;
@@ -652,7 +668,7 @@ tfoot td {
   min-height: 28px;
   padding: 5px 9px;
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 0;
   background: rgba(17, 17, 17, 0.92);
   color: #ffffff;
   font-size: 0.78rem;
@@ -803,7 +819,7 @@ tfoot td {
 }
 
 .world-month-panel {
-  padding: 22px;
+  padding: 18px;
 }
 
 .world-month-panel .stats-row {
@@ -840,13 +856,13 @@ tfoot td {
 }
 
 .world-month-panel .charts-grid {
-  gap: 12px;
-  margin-top: 14px;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .world-month-panel .chart-card {
   gap: 8px;
-  padding: 12px 12px 10px;
+  padding: 10px;
 }
 
 .world-month-panel .formula-note {
@@ -859,7 +875,7 @@ tfoot td {
 
 .world-trend-card {
   gap: 8px;
-  padding: 14px 14px 12px;
+  padding: 12px;
 }
 
 .world-trend-card .formula-note,
@@ -871,25 +887,26 @@ tfoot td {
 .charts-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 16px;
+  gap: 12px;
+  margin-top: 14px;
 }
 
 .comparison-pair-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 16px;
+  gap: 12px;
+  margin-top: 14px;
 }
 
 .chart-card {
   display: grid;
   align-content: start;
-  gap: 10px;
-  padding: 12px;
+  gap: 8px;
+  padding: 10px;
   border: 1px solid var(--line);
   border-radius: var(--panel-radius);
   background: var(--panel-soft);
+  overflow: hidden;
 }
 
 .chart-card.is-wide {
@@ -898,7 +915,7 @@ tfoot td {
 
 .chart-card h4 {
   margin: 0;
-  font-size: 0.96rem;
+  font-size: 0.92rem;
 }
 
 .comparison-controls {
@@ -937,8 +954,8 @@ tfoot td {
 .series-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 16px;
-  margin-top: 10px;
+  gap: 8px 12px;
+  margin-top: 8px;
   color: var(--muted);
   font-size: 0.82rem;
 }
@@ -947,6 +964,12 @@ tfoot td {
   display: inline-flex;
   align-items: center;
   gap: 7px;
+}
+
+.series-swatch-line {
+  width: 30px;
+  height: 12px;
+  display: block;
 }
 
 .series-swatch {
@@ -1030,10 +1053,14 @@ tfoot td {
 
 @media (max-width: 1080px) {
   .hero,
-  .region-card,
   .comparison-grid,
   .charts-grid,
   .comparison-pair-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .region-card-top,
+  .world-region-card .region-card-top {
     grid-template-columns: 1fr;
   }
 
@@ -1066,14 +1093,18 @@ tfoot td {
 }
 
 @media (max-width: 920px) {
+  html {
+    font-size: 90%;
+  }
+
   .page-shell {
-    width: min(100vw - 24px, 1400px);
-    padding-bottom: 28px;
+    width: min(100vw - 18px, 1480px);
+    padding-bottom: 22px;
   }
 
   .hero,
   .panel {
-    padding: 22px;
+    padding: 18px;
   }
 
   .comparison-controls {
@@ -1091,14 +1122,18 @@ tfoot td {
 }
 
 @media (max-width: 720px) {
+  html {
+    font-size: 92%;
+  }
+
   .page-shell {
-    width: min(100vw - 14px, 1280px);
-    padding-bottom: 22px;
+    width: min(100vw - 12px, 1280px);
+    padding-bottom: 18px;
   }
 
   .hero,
   .panel {
-    padding: 16px;
+    padding: 14px;
   }
 
   .control-bar,
@@ -1165,7 +1200,7 @@ tfoot td {
   .region-card,
   .month-panel,
   .chart-card {
-    padding: 16px;
+    padding: 14px;
   }
 
   .region-picker .region-list,
@@ -1221,9 +1256,13 @@ tfoot td {
 }
 
 @media (max-width: 560px) {
+  html {
+    font-size: 94%;
+  }
+
   .page-shell {
     width: calc(100vw - 10px);
-    padding: 10px 0 18px;
+    padding: 8px 0 14px;
   }
 
   .hero,
@@ -1234,7 +1273,7 @@ tfoot td {
   .region-card,
   .month-panel,
   .chart-card {
-    padding: 14px;
+    padding: 12px;
   }
 
   .hero h1 {
@@ -1275,7 +1314,7 @@ tfoot td {
 
   .world-region-card .region-card-chart,
   .world-trend-card {
-    padding: 12px;
+    padding: 10px;
   }
 
   table {
