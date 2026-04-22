@@ -36,6 +36,38 @@ const COMPARISON_PAIR_CONFIGS = [
 const RANDOM_SELECTION_SIZE = 4;
 const RANDOM_SELECTION_ATTEMPTS = 200;
 const RANDOM_SELECTION_MIN_DISTANCE_STEPS = [80, 60, 45, 30];
+const HERO_MESSAGE_FULL_LINES = [
+  "태백산맥은 지도에선 선 하나인데, 기후 그래프에선 거의 연출 담당입니다.",
+  "백령도, 서울, 울릉도, 제주를 같이 보면 한반도는 갑자기 꽤 넓어집니다.",
+  "서해안의 안개, 동해안의 바람, 남해안의 비. 한국지리는 해안선부터 바쁩니다.",
+  "같은 남한인데도 내륙은 연교차로 말하고 해안은 습도로 반응합니다.",
+  "추풍령 하나로 공기 결이 달라지는 걸 보면 지형은 정말 성실한 과목입니다.",
+  "서울만 보고 지나가면 아쉽습니다. 속초, 완도, 울진이 들어오면 한국지리가 훨씬 살아납니다.",
+];
+const HERO_MESSAGE_OPENERS = [
+  "백령도에서 서귀포까지 훑어 보면,",
+  "영동과 영서를 한 화면에 올리면,",
+  "같은 남한끼리만 비교해도,",
+  "서울과 평양을 나란히 두면,",
+  "서해안과 동해안을 붙여 놓으면,",
+  "추풍령 하나 끼워 넣는 순간,",
+  "울릉도와 제주를 같이 보면,",
+  "내륙 도시와 해안 도시를 섞어 고르면,",
+  "태백산맥을 사이에 두고 보면,",
+  "좁아 보이는 한반도도,",
+];
+const HERO_MESSAGE_PAYOFFS = [
+  "지형이 얼마나 성실하게 일하는지 바로 보입니다.",
+  "겨울 바람과 여름 비가 서로 다른 흔적을 남깁니다.",
+  "그래프가 먼저 지역색을 설명하기 시작합니다.",
+  "바다와 산맥이 번갈아 주연을 맡습니다.",
+  "기온선 하나에도 동서 차이가 꽤 또렷합니다.",
+  "강수량 막대가 해안선의 존재감을 크게 키웁니다.",
+  "한반도 기후가 생각보다 입체적이라는 게 금방 드러납니다.",
+  "위도만으로는 설명 안 되는 장면이 자꾸 나옵니다.",
+  "영남, 호남, 영서, 영동이 각자 자기 얘기를 합니다.",
+  "한국지리가 은근히 아니라 꽤 대놓고 재밌어집니다.",
+];
 const COMPARISON_LINE_STYLES = [
   { dasharray: "", marker: "circle" },
   { dasharray: "10 6", marker: "square" },
@@ -64,6 +96,7 @@ const state = {
 };
 
 const elements = {
+  heroText: document.querySelector("#heroText"),
   heroCount: document.querySelector("#heroCount"),
   heroCaption: document.querySelector("#heroCaption"),
   selectionSummary: document.querySelector("#selectionSummary"),
@@ -92,8 +125,29 @@ async function init() {
 
   state.regions = [...state.dataset.regions].sort(sortRegions);
   applyDefaultSelection();
+  applyRandomHeroMessage();
   bindEvents();
   render();
+}
+
+function applyRandomHeroMessage() {
+  if (!elements.heroText) {
+    return;
+  }
+
+  elements.heroText.textContent = buildRandomHeroMessage();
+}
+
+function buildRandomHeroMessage() {
+  if (Math.random() < 0.35) {
+    return pickRandomItem(HERO_MESSAGE_FULL_LINES);
+  }
+
+  return `${pickRandomItem(HERO_MESSAGE_OPENERS)} ${pickRandomItem(HERO_MESSAGE_PAYOFFS)}`;
+}
+
+function pickRandomItem(items) {
+  return items[Math.floor(Math.random() * items.length)];
 }
 
 function bindEvents() {
@@ -174,6 +228,12 @@ function bindEvents() {
 }
 
 function applyDefaultSelection() {
+  const randomRegions = pickRandomSpacedSelection();
+  if (randomRegions.length > 0) {
+    state.selectedIds = new Set(randomRegions.map((region) => region.id));
+    return;
+  }
+
   const defaults = state.dataset.defaultSampleNames ?? [];
   state.selectedIds = new Set(
     state.regions.filter((region) => defaults.includes(region.name)).map((region) => region.id)
@@ -190,13 +250,8 @@ function toggleSelection(regionId) {
 }
 
 function applyRandomSpacedSelection() {
-  const candidates = state.regions.filter(hasCoordinates);
-  if (candidates.length < RANDOM_SELECTION_SIZE) {
-    return;
-  }
-
-  const pickedRegions = findSpacedSelection(candidates, RANDOM_SELECTION_SIZE);
-  if (!pickedRegions.length) {
+  const pickedRegions = pickRandomSpacedSelection();
+  if (pickedRegions.length === 0) {
     return;
   }
 
@@ -212,6 +267,15 @@ function applyRandomSpacedSelection() {
   }
 
   render();
+}
+
+function pickRandomSpacedSelection() {
+  const candidates = state.regions.filter(hasCoordinates);
+  if (candidates.length < RANDOM_SELECTION_SIZE) {
+    return [];
+  }
+
+  return findSpacedSelection(candidates, RANDOM_SELECTION_SIZE);
 }
 
 function findSpacedSelection(candidates, selectionSize) {
@@ -474,7 +538,7 @@ function renderRegionCard(region, sharedChartScale) {
           <div class="chart-card">
             <h4>연중 기온·강수량</h4>
             ${renderClimateChart(region, sharedChartScale)}
-            <p class="chart-caption">회색 막대는 강수량, 검은 선은 평균 기온입니다.</p>
+            <p class="chart-caption">* 회색 막대는 강수량, 검은 선은 평균 기온입니다.</p>
           </div>
         </div>
       </div>
@@ -586,7 +650,7 @@ function renderComparison(regions) {
         </tbody>
       </table>
     </div>
-    <p class="formula-note">현재 편차 기준: ${escapeHtml(baseline.label)}. 편차 = 해당 지점 값 - ${escapeHtml(
+    <p class="formula-note">* 현재 편차 기준: ${escapeHtml(baseline.label)}. 편차 = 해당 지점 값 - ${escapeHtml(
     baseline.formulaLabel
   )}${baseline.mode === "region" ? " · 기준 지점은 편차 그래프에서 제외됩니다." : ""}</p>
     <div class="charts-grid">
@@ -594,13 +658,13 @@ function renderComparison(regions) {
         <h4>월 평균 기온</h4>
         ${renderMonthlyTemperatureTrendChart(rows, sharedChartScale)}
         ${renderTrendLegend(rows, "#111111")}
-        <p class="formula-note">선택된 지점 전체에 같은 기온 축을 적용했습니다.</p>
+        <p class="formula-note">* 선택된 지점 전체에 같은 기온 축을 적용했습니다.</p>
       </article>
       <article class="chart-card world-trend-card">
         <h4>누적 강수량</h4>
         ${renderCumulativePrecipitationTrendChart(rows)}
         ${renderTrendLegend(rows, "#555555")}
-        <p class="formula-note">누적 강수량은 1월부터 해당 월까지의 강수량 합이며, 선택된 지점 전체에 같은 강수 축을 적용했습니다.</p>
+        <p class="formula-note">* 누적 강수량은 1월부터 해당 월까지의 강수량 합이며, 선택된 지점 전체에 같은 강수 축을 적용했습니다.</p>
       </article>
     </div>
     <div class="comparison-pair-grid">
@@ -629,7 +693,7 @@ function renderComparison(regions) {
       <div class="chart-card is-wide">
         <h4>연교차(8월 평균기온 - 1월 평균기온) 비교</h4>
         ${renderAnnualRangeChart(rows)}
-        <p class="formula-note">연교차는 8월 평균기온에서 1월 평균기온을 뺀 값입니다.</p>
+        <p class="formula-note">* 연교차는 8월 평균기온에서 1월 평균기온을 뺀 값입니다.</p>
       </div>
     </div>
   `;
@@ -697,7 +761,7 @@ function renderMap(visibleRegions, selectedRegions) {
         </g>
       </svg>
       <div class="world-map-overlay">
-        <span class="map-overlay-pill">Natural Earth 10m</span>
+        <span class="map-overlay-pill">지도</span>
         <span class="map-overlay-pill">세로형 확대 보기</span>
         <span class="map-overlay-pill">기상청 지점정보 좌표</span>
       </div>

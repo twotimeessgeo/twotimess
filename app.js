@@ -42,6 +42,38 @@ const API_NORMAL_PERIOD = {
   end: "2020-12-31",
   label: "1991-2020",
 };
+const HERO_MESSAGE_FULL_LINES = [
+  "케이프타운과 카이로를 나란히 두면, 위도보다 바다가 더 말이 많아집니다.",
+  "사막, 스텝, 열대우림, 툰드라. 지도에서는 범주지만 그래프에서는 성격입니다.",
+  "기후는 암기보다 비교가 재밌습니다. 숫자를 붙여 놓는 순간 바로 캐릭터가 생깁니다.",
+  "같은 위도라고 안심하면 늘 바다가 반전을 준비하고 있습니다.",
+  "도시 하나를 고르면 그곳의 계절 리듬이, 여러 도시를 고르면 지리의 성격이 보입니다.",
+  "멀리 떨어진 도시들도 월별 그래프에선 금방 같은 토론 테이블에 앉습니다.",
+];
+const HERO_MESSAGE_OPENERS = [
+  "비슷한 위도끼리 모아 놔도,",
+  "지도에서 멀어 보이는 도시들도,",
+  "적도 근처를 줄 세워 봐도,",
+  "대륙 동안과 서안을 나란히 놓으면,",
+  "사막과 해안을 같은 축에 올리면,",
+  "산맥 하나를 사이에 둔 지역만 골라도,",
+  "북반구 겨울과 남반구 여름을 함께 켜 두면,",
+  "도시 네 곳만 찍어도,",
+  "바다를 낀 도시와 내륙 도시를 붙여 보면,",
+  "겉보기엔 온순한 중위도도,",
+];
+const HERO_MESSAGE_PAYOFFS = [
+  "그래프에서 바로 성격이 갈립니다.",
+  "해류가 슬쩍 주인공 자리를 가져갑니다.",
+  "강수 막대가 의외로 제일 수다스럽습니다.",
+  "1월과 7월이 서로 다른 증언을 합니다.",
+  "기후대 이름표보다 숫자가 더 빨리 설명합니다.",
+  "대륙성은 숨지 못하고 해양성은 티를 냅니다.",
+  "건조함과 습윤함이 같은 화면에서 맞붙습니다.",
+  "고도 한 번, 바다 한 번이 판을 바꿉니다.",
+  "계절 리듬이 도시마다 딱 다르게 울립니다.",
+  "지리는 조용한데 기후는 꽤 드라마틱합니다.",
+];
 const MONTH_LABELS = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
 const COLORS = {
   rain: "#5f5f5f",
@@ -284,6 +316,7 @@ const elements = {
   selectionSummary: document.querySelector("#selectionSummary"),
   selectedRegionsContent: document.querySelector("#selectedRegionsContent"),
   comparisonContent: document.querySelector("#comparisonContent"),
+  heroText: document.querySelector("#heroText"),
   heroCount: document.querySelector("#heroCount"),
   heroCaption: document.querySelector("#heroCaption"),
   worldMap: document.querySelector("#worldMap"),
@@ -318,6 +351,7 @@ async function init() {
       loadSavedCustomRegions()
     ).sort(sortRegions);
     applyDefaultSelection();
+    applyRandomHeroMessage();
     bindEvents();
     render();
   } catch (error) {
@@ -542,11 +576,16 @@ function bindEvents() {
 }
 
 function applyDefaultSelection() {
-  const nextSelected = new Set();
-  state.regions
-    .filter((region) => APP_CONFIG.defaultSampleNames.includes(region.name))
-    .forEach((region) => nextSelected.add(region.id));
-  state.selectedIds = nextSelected;
+  const randomRegions = pickRandomClimateSelection();
+  if (randomRegions.length > 0) {
+    state.selectedIds = new Set(randomRegions.map((region) => region.id));
+    return;
+  }
+
+  const fallbackRegions = state.regions.filter((region) =>
+    APP_CONFIG.defaultSampleNames.includes(region.name)
+  );
+  state.selectedIds = new Set(fallbackRegions.map((region) => region.id));
 }
 
 function normalizeComparisonBaseline(selectedRegions) {
@@ -560,6 +599,22 @@ function normalizeComparisonBaseline(selectedRegions) {
 }
 
 function applyRandomClimateSelection() {
+  const pickedRegions = pickRandomClimateSelection();
+  if (pickedRegions.length === 0) {
+    return;
+  }
+
+  state.selectedIds = new Set(pickedRegions.map((region) => region.id));
+  state.query = "";
+  elements.searchInput.value = "";
+  state.continent = "전체";
+  state.hemisphere = "전체";
+  state.climateGroup = "전체";
+  state.mapScope = "selected";
+  state.comparisonBaseline = "mean";
+}
+
+function pickRandomClimateSelection() {
   const groups = new Map();
   state.regions.forEach((region) => {
     if (!region.climateGroup || region.climateGroup === "전체") {
@@ -573,24 +628,21 @@ function applyRandomClimateSelection() {
   });
 
   const randomGroups = shuffleArray([...groups.keys()]).slice(0, RANDOM_CLIMATE_SELECTION_SIZE);
-  const nextSelected = new Set();
+  const pickedRegions = [];
   randomGroups.forEach((climateGroup) => {
     const candidates = groups.get(climateGroup) ?? [];
     if (candidates.length === 0) {
       return;
     }
     const pickedRegion = candidates[Math.floor(Math.random() * candidates.length)];
-    nextSelected.add(pickedRegion.id);
+    pickedRegions.push(pickedRegion);
   });
 
-  state.selectedIds = nextSelected;
-  state.query = "";
-  elements.searchInput.value = "";
-  state.continent = "전체";
-  state.hemisphere = "전체";
-  state.climateGroup = "전체";
-  state.mapScope = "selected";
-  state.comparisonBaseline = "mean";
+  if (pickedRegions.length >= RANDOM_CLIMATE_SELECTION_SIZE) {
+    return pickedRegions;
+  }
+
+  return shuffleArray(state.regions).slice(0, RANDOM_CLIMATE_SELECTION_SIZE);
 }
 
 function toggleRegion(regionId, isChecked) {
@@ -601,6 +653,26 @@ function toggleRegion(regionId, isChecked) {
     nextSelected.delete(regionId);
   }
   state.selectedIds = nextSelected;
+}
+
+function applyRandomHeroMessage() {
+  if (!elements.heroText) {
+    return;
+  }
+
+  elements.heroText.textContent = buildRandomHeroMessage();
+}
+
+function buildRandomHeroMessage() {
+  if (Math.random() < 0.35) {
+    return pickRandomItem(HERO_MESSAGE_FULL_LINES);
+  }
+
+  return `${pickRandomItem(HERO_MESSAGE_OPENERS)} ${pickRandomItem(HERO_MESSAGE_PAYOFFS)}`;
+}
+
+function pickRandomItem(items) {
+  return items[Math.floor(Math.random() * items.length)];
 }
 
 function render() {
@@ -940,38 +1012,30 @@ function renderSelectedRegions(selectedRegions) {
               <div class="world-region-chart-frame">
                 ${renderClimateChart(region, sharedChartScale)}
               </div>
-              <p class="chart-caption">회색 막대는 강수량, 검은 선은 평균 기온입니다.</p>
+              <p class="chart-caption">* 회색 막대는 강수량, 검은 선은 평균 기온입니다.</p>
             </div>
           </div>
-          <div class="table-wrap region-card-table">
-            <table>
+          <div class="table-wrap region-card-table is-transposed">
+            <table class="transpose-table">
               <thead>
                 <tr>
-                  <th>월</th>
-                  <th>평균 기온</th>
-                  <th>강수량</th>
+                  <th>항목</th>
+                  ${region.months.map((month) => `<th>${escapeHtml(month)}</th>`).join("")}
+                  <th>연간</th>
                 </tr>
               </thead>
               <tbody>
-                ${region.months
-                  .map(
-                    (month, monthIndex) => `
-                      <tr>
-                        <td>${escapeHtml(month)}</td>
-                        <td>${formatTemp(region.monthlyTemperatureC[monthIndex])}</td>
-                        <td>${formatMm(region.monthlyPrecipitationMm[monthIndex])}</td>
-                      </tr>
-                    `
-                  )
-                  .join("")}
-              </tbody>
-              <tfoot>
                 <tr>
-                  <td>연간</td>
+                  <th scope="row">평균 기온</th>
+                  ${region.monthlyTemperatureC.map((value) => `<td>${formatTemp(value)}</td>`).join("")}
                   <td>${formatTemp(region.annualMeanTemperatureC)}</td>
+                </tr>
+                <tr>
+                  <th scope="row">강수량</th>
+                  ${region.monthlyPrecipitationMm.map((value) => `<td>${formatMm(value)}</td>`).join("")}
                   <td>${formatMm(region.annualPrecipitationMm)}</td>
                 </tr>
-              </tfoot>
+              </tbody>
             </table>
           </div>
         </article>
@@ -1016,7 +1080,7 @@ function buildApiStatusText() {
     return state.apiMessage;
   }
 
-  return "기본 제공 지역은 Open-Meteo Historical Weather API(ERA5) 1991-2020 기준으로 맞추고, 추가 지역도 같은 기준으로 계산합니다. 검색으로 새 지역을 붙일 수 있고, 필요하면 기본 데이터 재동기화로 다시 계산할 수 있습니다.";
+  return "* 기본 제공 지역은 Open-Meteo Historical Weather API(ERA5) 1991-2020 기준으로 맞추고, 추가 지역도 같은 기준으로 계산합니다. 검색으로 새 지역을 붙일 수 있고, 필요하면 기본 데이터 재동기화로 다시 계산할 수 있습니다.";
 }
 
 function renderApiResults() {
@@ -1624,13 +1688,13 @@ function renderComparison(selectedRegions) {
         <h4>월 평균 기온</h4>
         ${renderMonthlyTemperatureTrendChart(selectedRegions, sharedChartScale)}
         ${renderTrendLegend(selectedRegions, COLORS.temperature)}
-        <p class="formula-note">선택한 지역 전체에 같은 기온 축을 적용했습니다.</p>
+        <p class="formula-note">* 선택한 지역 전체에 같은 기온 축을 적용했습니다.</p>
       </article>
       <article class="chart-card world-trend-card">
         <h4>누적 강수량</h4>
         ${renderCumulativePrecipitationTrendChart(selectedRegions)}
         ${renderTrendLegend(selectedRegions, COLORS.rain)}
-        <p class="formula-note">누적 강수량은 1월부터 해당 월까지의 강수량 합이며, 선택한 지역 전체에 같은 강수 축을 적용했습니다.</p>
+        <p class="formula-note">* 누적 강수량은 1월부터 해당 월까지의 강수량 합이며, 선택한 지역 전체에 같은 강수 축을 적용했습니다.</p>
       </article>
     </div>
   `;
@@ -1727,21 +1791,21 @@ function renderMonthPanel(selectedRegions, monthIndex, panelIndex, baseline) {
       </div>
       <div class="charts-grid">
         <article class="chart-card">
-          <h4>&lt;(가) ${escapeHtml(monthLabel)} 평균 기온 차이&gt;</h4>
+          <h4>${escapeHtml(monthLabel)} 평균 기온 차이</h4>
           ${renderDeviationTemperatureChart(chartRows)}
         </article>
         <article class="chart-card">
-          <h4>&lt;(나) ${escapeHtml(monthLabel)} 강수량 차이&gt;</h4>
+          <h4>${escapeHtml(monthLabel)} 강수량 차이</h4>
           ${renderDeviationPrecipitationChart(chartRows)}
         </article>
       </div>
       <p class="formula-note">
-        현재 기준: ${escapeHtml(baseline.label)}
+        * 현재 기준: ${escapeHtml(baseline.label)}
         <br />
-        평균 기온 차이 = 해당 지역 기온 − ${escapeHtml(baseline.formulaLabel)}
+        * 평균 기온 차이 = 해당 지역 기온 − ${escapeHtml(baseline.formulaLabel)}
         <br />
-        강수량 차이 = 해당 지역 강수량 − ${escapeHtml(baseline.formulaLabel)}
-        ${baseline.mode === "region" ? "<br />기준 지역은 편차 그래프에서 제외했습니다." : ""}
+        * 강수량 차이 = 해당 지역 강수량 − ${escapeHtml(baseline.formulaLabel)}
+        ${baseline.mode === "region" ? "<br />* 기준 지역은 편차 그래프에서 제외했습니다." : ""}
       </p>
     </article>
   `;
@@ -2221,12 +2285,9 @@ function renderWorldMap(regions) {
   }
 
   const background = renderProjectedWorldMapBackground(projection);
-  const mapStatusLabel = state.mapLoadError ? "정확 지도 로드 실패" : "위경도 기준 고정";
+  const mapTypeLabel = "투영 지도";
+  const mapStatusLabel = state.mapLoadError ? "지도 로드 실패" : "위경도 기준";
   const mapScopeLabel = state.mapScope === "selected" ? "선택 지역만 표시" : "전체 지역 표시";
-  const mapResolutionLabel = state.worldMapData?.resolution
-    ? `Natural Earth ${state.worldMapData.resolution}`
-    : "Natural Earth";
-  const projectionLabel = APP_CONFIG.mapProjection === "mercator" ? "Mercator" : "Natural Earth";
 
   return `
     <div class="world-map-frame is-natural">
@@ -2236,7 +2297,7 @@ function renderWorldMap(regions) {
         ${regions.map((region) => renderMapMarker(region, projection)).join("")}
       </div>
       <div class="world-map-overlay">
-        <span class="map-overlay-pill">${mapResolutionLabel} · ${projectionLabel}</span>
+        <span class="map-overlay-pill">${mapTypeLabel}</span>
         <span class="map-overlay-pill">${mapStatusLabel}</span>
         <span class="map-overlay-pill">${mapScopeLabel}</span>
         <span class="map-overlay-pill">마커 ${regions.length}개</span>

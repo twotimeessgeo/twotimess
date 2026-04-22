@@ -542,6 +542,10 @@ table {
   font-size: 0.88rem;
 }
 
+.table-wrap.is-transposed table {
+  min-width: 960px;
+}
+
 thead th,
 tfoot td {
   background: #f2f2f2;
@@ -563,6 +567,29 @@ td:first-child {
 
 tbody tr:last-child td,
 tfoot td {
+  border-bottom: none;
+}
+
+.transpose-table th,
+.transpose-table td {
+  min-width: 70px;
+  text-align: center;
+}
+
+.transpose-table thead th:first-child,
+.transpose-table tbody th[scope="row"] {
+  text-align: left;
+}
+
+.transpose-table tbody th[scope="row"] {
+  padding: 9px 11px;
+  border-bottom: 1px solid var(--line-faint);
+  background: #fafafa;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.transpose-table tbody tr:last-child th[scope="row"] {
   border-bottom: none;
 }
 
