@@ -26,10 +26,11 @@ body {
   font-family: "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   background: var(--paper);
   line-height: 1.55;
+  overflow-x: hidden;
 }
 
 .page-shell {
-  width: min(1760px, calc(100vw - 56px));
+  width: min(1760px, calc(100vw - 32px));
   margin: 0 auto;
   padding: 28px 0 56px;
 }
@@ -58,6 +59,32 @@ body {
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+.app-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.app-switch-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.app-switch-link.is-active {
+  background: var(--ink);
+  color: #ffffff;
 }
 
 .hero h1,
@@ -418,6 +445,7 @@ body {
 
 .table-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border: 1px solid var(--line);
   border-radius: var(--panel-radius);
   background: #ffffff;
@@ -425,6 +453,7 @@ body {
 
 table {
   width: 100%;
+  min-width: 560px;
   border-collapse: collapse;
   font-size: 0.94rem;
 }
@@ -460,7 +489,7 @@ tfoot td {
 .world-map-frame {
   position: relative;
   aspect-ratio: 1000 / 520;
-  min-height: 580px;
+  min-height: clamp(320px, 48vw, 580px);
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 0;
@@ -768,17 +797,24 @@ tfoot td {
   .charts-grid {
     grid-template-columns: 1fr;
   }
+
+  .section-heading,
+  .region-card-header,
+  .api-result-card-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 720px) {
   .page-shell {
-    width: min(100vw - 20px, 1280px);
+    width: min(100vw - 16px, 1280px);
     padding-bottom: 28px;
   }
 
   .hero,
   .panel {
-    padding: 22px;
+    padding: 20px;
   }
 
   .control-bar,
@@ -788,6 +824,53 @@ tfoot td {
 
   .action-row {
     justify-content: flex-start;
+  }
+
+  .action-row > * {
+    flex: 1 1 180px;
+  }
+
+  .hero {
+    gap: 24px;
+  }
+
+  .hero h1 {
+    max-width: none;
+    font-size: clamp(2.5rem, 14vw, 4.2rem);
+  }
+
+  .hero-text {
+    margin-top: 18px;
+    line-height: 1.7;
+  }
+
+  .hero-note {
+    width: 100%;
+    padding: 22px 18px;
+  }
+
+  .hero-note strong {
+    font-size: 2rem;
+  }
+
+  .section-heading {
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+
+  .selection-summary,
+  .collapse-hint {
+    min-height: 38px;
+    white-space: normal;
+  }
+
+  .world-stage,
+  .region-picker,
+  .api-stage,
+  .region-card,
+  .month-panel,
+  .chart-card {
+    padding: 18px;
   }
 
   .region-picker .region-list,
@@ -802,7 +885,27 @@ tfoot td {
   }
 
   .world-map-frame {
-    min-height: 420px;
-    aspect-ratio: 1000 / 620;
+    min-height: 300px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .map-marker::after {
+    display: none;
+  }
+
+  .region-card h3,
+  .section-heading h2,
+  .month-panel h3 {
+    line-height: 1.2;
+  }
+
+  .meta-pill,
+  .stat-pill,
+  .map-overlay-pill {
+    font-size: 0.82rem;
+  }
+
+  table {
+    min-width: 520px;
   }
 }

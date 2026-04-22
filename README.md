@@ -1,8 +1,9 @@
 # 투타임즈 기후머신
 
-기본 57개 지역을 Open-Meteo ERA5 `1991-2020` 기준으로 맞춘 정적 웹 앱입니다.
-모든 번들 기후 데이터는 같은 API 기준으로 계산되고, 추가 지역도 같은 방식으로 붙습니다.
-Open-Meteo API 검색으로 새로운 도시를 계속 추가할 수 있고, 추가한 지역은 현재 브라우저에 저장되어 새로고침 후에도 유지됩니다.
+정적 HTML/CSS/JS로 만든 기후 비교 웹 앱입니다.
+
+- `세계지리` 버전은 Open-Meteo `1991-2020` 기준으로 세계 여러 지역의 월별 기온·강수량을 비교합니다.
+- `한국지리` 버전은 기상청 `1991-2020` 평년값과 기상청 지점정보를 기준으로 남한·북한 대표 지점을 비교합니다.
 
 ## 포함 기능
 
@@ -23,15 +24,18 @@ Open-Meteo API 검색으로 새로운 도시를 계속 추가할 수 있고, 추
 - 여러 지역 선택 시 1월, 7월 평균 기온·강수량 편차 비교
 - 예시 문제 스타일의 점 그래프, 막대 그래프
 - 직각형 흑백 UI와 Pretendard 폰트
+- 한국지리 전용 남한/북한 필터와 권역 필터
+- 한국지리 전용 `1월`, `8월`, `겨울(12~2월)`, `여름(6~8월)` 비교 표와 그래프
+- 한국지리 전용 `일최저기온 <0℃ 일수`, `일최저기온 ≥25℃ 일수` 지표
 
 ## 실행 방법
 
 가장 쉬운 방법은 아래 둘 중 하나입니다.
 
 1. `open.command`를 더블클릭한다.
-2. `index.html`을 더블클릭한다.
+2. `index.html` 또는 `korea.html`을 더블클릭한다.
 
-이제 `data/climate-data.js`와 `data/world-countries-50m.js`가 함께 포함되어,
+이제 `data/climate-data.js`, `data/korea-climate-data.js`, `data/world-countries-50m.js`가 함께 포함되어,
 로컬 서버 없이도 지도까지 포함한 전체 앱이 바로 실행됩니다.
 
 단, `API로 새 지역 추가` 기능은 인터넷 연결이 필요합니다.
@@ -70,19 +74,29 @@ python3 -m http.server 8000
 
 ## 데이터 재생성
 
-기본 지역 57개 통계를 Open-Meteo 기준으로 다시 생성하려면 아래 스크립트를 실행합니다.
+세계지리 기본 지역 통계를 Open-Meteo 기준으로 다시 생성하려면 아래 스크립트를 실행합니다.
 
 ```bash
 python3 scripts/extend_with_wmo.py
 ```
 
+한국지리 남북한 데이터를 기상청 기준으로 다시 생성하려면 아래 스크립트를 실행합니다.
+
+```bash
+python3 scripts/build_korea_dataset.py
+```
+
 ## 파일 구성
 
-- `index.html`: 앱 화면
+- `index.html`: 세계지리 앱 화면
+- `korea.html`: 한국지리 앱 화면
 - `styles.css`: UI 스타일
-- `app.js`: 데이터 로딩, 표/그래프 렌더링
+- `app.js`: 세계지리 데이터 로딩, 표/그래프 렌더링
+- `korea-app.js`: 한국지리 데이터 로딩, 표/그래프 렌더링
 - `data/climate-data.json`: 기본 57개 지역의 번들 기후 데이터
 - `data/climate-data.js`: 브라우저에서 바로 쓰는 데이터 번들
+- `data/korea-climate-data.json`: 남북한 49개 지점의 기상청 기준 번들 데이터
+- `data/korea-climate-data.js`: 브라우저에서 바로 쓰는 한국지리 데이터 번들
 - `data/world-countries-50m.js`: 브라우저에서 바로 쓰는 고해상도 세계 지도 Topology 번들
 - `data/region-metadata.json`: 좌표, 영문명, 별칭 메타데이터
 - `data/wmo-region-manifest.json`: 초기 보강 지역 선정에 사용한 외부 지역 목록
@@ -92,6 +106,7 @@ python3 scripts/extend_with_wmo.py
 - `data/vendor-d3.min.js`: 지도 투영 렌더링용 D3 번들
 - `data/vendor-topojson-client.min.js`: TopoJSON 파싱 라이브러리
 - `scripts/extend_with_wmo.py`: 기본 지역 통계를 Open-Meteo 기준으로 재생성하는 스크립트
+- `scripts/build_korea_dataset.py`: 한국지리 남북한 데이터를 기상청 기준으로 재생성하는 스크립트
 - `.github/workflows/pages.yml`: GitHub Pages 자동 배포 워크플로
 
 ## 온라인 확장 동작
@@ -106,5 +121,8 @@ python3 scripts/extend_with_wmo.py
 
 - Open-Meteo Geocoding API: <https://open-meteo.com/en/docs/geocoding-api>
 - Open-Meteo Historical Weather API: <https://open-meteo.com/en/docs/historical-weather-api>
+- 기상자료개방포털 우리나라 기후평년값 파일셋: <https://data.kma.go.kr/climate/average30Years/selectAverage30YearsKoreaFileset.do?pgmNo=716>
+- 기상자료개방포털 북한 기후평년값 파일셋: <https://data.kma.go.kr/climate/average30Years/selectAverage30YearsNorthKoreaFileset.do?pgmNo=732>
+- 기상자료개방포털 지점정보: <https://data.kma.go.kr/tmeta/stn/selectStnList.do>
 - Natural Earth Downloads: <https://www.naturalearthdata.com/downloads/>
 - Natural Earth Terms of Use: <https://www.naturalearthdata.com/about/terms-of-use/>

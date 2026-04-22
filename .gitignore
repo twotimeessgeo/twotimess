@@ -1,2 +1,5 @@
 .DS_Store
 data/.open-meteo-cache/
+data/average30yearsKorea_1991_month.xlsx
+data/average30yearsNKorea_1991_month.xlsx
+data/korea-climate-cache.json
