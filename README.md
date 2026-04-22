@@ -80,6 +80,12 @@ python3 -m http.server 8000
 python3 scripts/extend_with_wmo.py
 ```
 
+확장 후보 세계 지역을 현재 번들 데이터에 더 보강하려면 아래 스크립트를 실행합니다.
+
+```bash
+python3 scripts/add_world_regions.py
+```
+
 한국지리 남북한 데이터를 기상청 기준으로 다시 생성하려면 아래 스크립트를 실행합니다.
 
 ```bash
@@ -106,6 +112,7 @@ python3 scripts/build_korea_dataset.py
 - `data/vendor-d3.min.js`: 지도 투영 렌더링용 D3 번들
 - `data/vendor-topojson-client.min.js`: TopoJSON 파싱 라이브러리
 - `scripts/extend_with_wmo.py`: 기본 지역 통계를 Open-Meteo 기준으로 재생성하는 스크립트
+- `scripts/add_world_regions.py`: 추가 후보 세계 지역을 Open-Meteo 기준으로 번들 데이터에 보강하는 스크립트
 - `scripts/build_korea_dataset.py`: 한국지리 남북한 데이터를 기상청 기준으로 재생성하는 스크립트
 - `.github/workflows/pages.yml`: GitHub Pages 자동 배포 워크플로
 
