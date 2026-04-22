@@ -49,6 +49,54 @@ const HERO_MESSAGE_FULL_LINES = [
   "같은 위도라고 안심하면 늘 바다가 반전을 준비하고 있습니다.",
   "도시 하나를 고르면 그곳의 계절 리듬이, 여러 도시를 고르면 지리의 성격이 보입니다.",
   "멀리 떨어진 도시들도 월별 그래프에선 금방 같은 토론 테이블에 앉습니다.",
+  "세계지리는 멀리 있어 어려운 게 아니라, 너무 멀어서 오히려 비교가 재밌습니다.",
+  "지도에서는 한 점인데, 그래프에서는 도시마다 말투가 전부 다릅니다.",
+];
+const HERO_MESSAGE_QUIZZES = [
+  "같은 위도인데도 더 따뜻한 도시는 왜 생길까요. 해류를 먼저 의심하면 꽤 잘 맞습니다.",
+  "적도에 가깝다고 늘 비가 많을까요. 사막은 이런 일반화를 별로 좋아하지 않습니다.",
+  "1월과 7월 차이가 유독 큰 지역은 보통 바다보다 무엇의 영향을 더 크게 받을까요.",
+  "대륙 동안과 서안 중 어느 쪽이 더 온순한 그래프를 보일까요. 정답은 바다가 힌트를 줍니다.",
+  "비슷한 기온인데 강수 패턴이 완전히 다른 두 도시는 무엇이 갈라놓았을까요.",
+  "산지가 끼어 있으면 바람은 어느 쪽에서 더 쉽게 성격이 달라질까요.",
+  "해양성 기후는 왜 여름과 겨울 모두 조금 덜 극적일까요. 바다가 힌트를 거의 다 말해줍니다.",
+  "같은 아열대라도 어떤 곳은 촉촉하고 어떤 곳은 바삭한 이유가 뭘까요.",
+];
+const HERO_MESSAGE_ASIDES = [
+  "산맥은 지도에선 얇은 선인데 날씨에서는 생각보다 자주 편 가르기를 합니다.",
+  "해류는 바다 속 조연처럼 보이지만 기후 문제에서는 꽤 자주 주연입니다.",
+  "강수량 막대가 조용하면 그 지역은 대개 말수보다 건조함이 많습니다.",
+  "지리는 면적으로 배우지만 기후는 리듬으로 기억하면 더 오래 갑니다.",
+  "지도에서 가까워 보여도 바다 하나 끼면 생활감각이 꽤 달라집니다.",
+  "대륙 내부는 계절을 세게 타고, 해안은 바다 눈치를 꽤 봅니다.",
+  "숫자는 차갑지만, 월별 그래프를 늘어놓으면 지역성이 꽤 수다스러워집니다.",
+  "사막은 덥기만 한 곳이 아니라, 비 이야기가 유난히 짧은 곳이기도 합니다.",
+  "고도가 높아지면 위도보다 먼저 분위기가 달라지는 장면이 자주 나옵니다.",
+  "기후대 분류는 깔끔해 보여도 실제 도시는 늘 그 경계에서 재미를 만듭니다.",
+];
+const HERO_MESSAGE_DARKS = [
+  "대륙성 기후는 계절에 늘 과몰입합니다. 여름도 세고 겨울도 세서 타협이 없습니다.",
+  "사막의 강수 그래프는 너무 조용해서 오히려 눈치가 보일 정도입니다.",
+  "몬순은 계절풍이라기보다 매년 공지 없이 들이닥치는 대형 일정에 가깝습니다.",
+  "해양성 기후는 온건한 척하지만, 비로 끝까지 존재감을 챙깁니다.",
+  "같은 위도만 믿고 접근하면 해류가 뒤에서 비웃는 장면을 자주 보게 됩니다.",
+  "열대우림은 촉촉함을 포기하지 않고, 스텝은 강수 소식에 늘 답장이 느립니다.",
+  "기후대 경계는 지도에선 반듯한데, 실제 도시는 늘 그 선 바깥에서 사고를 칩니다.",
+  "고산 기후는 높다는 이유 하나로 늘 예외를 선언하는데, 이상하게 또 납득이 됩니다.",
+  "건조 지역은 비가 없는 게 아니라, 강수량 표가 말을 아끼는 쪽에 가깝습니다.",
+  "해류 한 줄 바뀌면 같은 위도 도시도 갑자기 서로 남처럼 굴기 시작합니다.",
+  "내륙은 계절 기복을 숨길 생각이 없고, 해안은 바다 뒤에 숨어서 부드러운 척을 합니다.",
+  "교과서에서는 기후가 차분해 보이지만, 그래프를 켜면 지역마다 성격이 꽤 험합니다.",
+];
+const ECONOMY_EGG_JOKES = [
+  "경제지리 속보: 입지가 좋은 농담은 아직 시장 접근성을 확보하지 못했습니다.",
+  "공업 입지는 원료와 시장 사이에서 고민하고, 저는 드립과 자존심 사이에서 고민합니다.",
+  "집적경제는 친구를 많이 부르는데, 과밀은 늘 초대 안 했는데도 따라옵니다.",
+  "중심지 이론은 그럴듯한데, 시험장에 가면 늘 제 기억만 주변지로 밀려납니다.",
+  "항만도시는 배가 들어와 성장하고, 이 농담은 들어와도 부가가치가 거의 없습니다.",
+  "오늘의 경제지리 한마디: 베버는 운송비를 줄였는데 제 웃음 손실은 줄이지 못했습니다.",
+  "입지 삼각형은 삼각형인데, 막상 문제를 풀면 체감은 미로에 더 가깝습니다.",
+  "CBD는 도심의 중심인데, 이 농담의 중심은 아직 찾는 중입니다.",
 ];
 const HERO_MESSAGE_OPENERS = [
   "비슷한 위도끼리 모아 놔도,",
@@ -61,6 +109,10 @@ const HERO_MESSAGE_OPENERS = [
   "도시 네 곳만 찍어도,",
   "바다를 낀 도시와 내륙 도시를 붙여 보면,",
   "겉보기엔 온순한 중위도도,",
+  "해류 하나만 끼어들어도,",
+  "건조 지역을 얕보는 순간,",
+  "몬순권 도시를 가져다 붙이면,",
+  "대륙 내부를 슬쩍 끼워 넣는 순간,",
 ];
 const HERO_MESSAGE_PAYOFFS = [
   "그래프에서 바로 성격이 갈립니다.",
@@ -73,6 +125,10 @@ const HERO_MESSAGE_PAYOFFS = [
   "고도 한 번, 바다 한 번이 판을 바꿉니다.",
   "계절 리듬이 도시마다 딱 다르게 울립니다.",
   "지리는 조용한데 기후는 꽤 드라마틱합니다.",
+  "온순해 보이던 도시도 갑자기 본색을 드러냅니다.",
+  "교과서 한 줄 설명이 갑자기 너무 순하게 느껴집니다.",
+  "강수 막대가 생각보다 훨씬 독하게 증언합니다.",
+  "바다가 중재하지 않는 순간 계절이 과격해집니다.",
 ];
 const MONTH_LABELS = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
 const COLORS = {
@@ -284,6 +340,7 @@ const coordinateFormatter = new Intl.NumberFormat("ko-KR", {
   maximumFractionDigits: 2,
 });
 let mapLayoutAnimationFrame = 0;
+let economyEggToastTimer = 0;
 const APP_CONFIG = normalizeAppConfig(window.CLIMATE_APP_CONFIG ?? {});
 
 const state = {
@@ -317,6 +374,8 @@ const elements = {
   selectedRegionsContent: document.querySelector("#selectedRegionsContent"),
   comparisonContent: document.querySelector("#comparisonContent"),
   heroText: document.querySelector("#heroText"),
+  economyEggButton: document.querySelector("#economyEggButton"),
+  economyEggToast: document.querySelector("#economyEggToast"),
   heroCount: document.querySelector("#heroCount"),
   heroCaption: document.querySelector("#heroCaption"),
   worldMap: document.querySelector("#worldMap"),
@@ -564,6 +623,10 @@ function bindEvents() {
     void addRegionFromApiResult(Number(addButton.dataset.apiResultIndex));
   });
 
+  elements.economyEggButton?.addEventListener("click", () => {
+    showEconomyEggToast();
+  });
+
   window.addEventListener("resize", () => {
     if (mapLayoutAnimationFrame) {
       cancelAnimationFrame(mapLayoutAnimationFrame);
@@ -664,11 +727,45 @@ function applyRandomHeroMessage() {
 }
 
 function buildRandomHeroMessage() {
-  if (Math.random() < 0.35) {
+  const roll = Math.random();
+
+  if (roll < 0.18) {
     return pickRandomItem(HERO_MESSAGE_FULL_LINES);
   }
 
+  if (roll < 0.36) {
+    return pickRandomItem(HERO_MESSAGE_QUIZZES);
+  }
+
+  if (roll < 0.58) {
+    return pickRandomItem(HERO_MESSAGE_ASIDES);
+  }
+
+  if (roll < 0.8) {
+    return pickRandomItem(HERO_MESSAGE_DARKS);
+  }
+
   return `${pickRandomItem(HERO_MESSAGE_OPENERS)} ${pickRandomItem(HERO_MESSAGE_PAYOFFS)}`;
+}
+
+function showEconomyEggToast() {
+  if (!elements.economyEggToast) {
+    return;
+  }
+
+  elements.economyEggToast.hidden = false;
+  elements.economyEggToast.textContent = pickRandomItem(ECONOMY_EGG_JOKES);
+
+  if (economyEggToastTimer) {
+    window.clearTimeout(economyEggToastTimer);
+  }
+
+  economyEggToastTimer = window.setTimeout(() => {
+    if (elements.economyEggToast) {
+      elements.economyEggToast.hidden = true;
+    }
+    economyEggToastTimer = 0;
+  }, 3600);
 }
 
 function pickRandomItem(items) {
@@ -910,7 +1007,8 @@ function renderRegionOptions(regions) {
     );
   }
 
-  return regions
+  return [...regions]
+    .sort((left, right) => collator.compare(left.name, right.name))
     .map((region) => {
       const isSelected = state.selectedIds.has(region.id);
       return `

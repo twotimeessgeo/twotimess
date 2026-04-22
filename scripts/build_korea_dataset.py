@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import re
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
@@ -14,10 +15,12 @@ import openpyxl
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_JSON = ROOT / "data" / "korea-climate-data.json"
 OUTPUT_JS = ROOT / "data" / "korea-climate-data.js"
+EXISTING_DATASET_JSON = ROOT / "data" / "korea-climate-data.json"
 
 MONTHS = [f"{index}월" for index in range(1, 13)]
 KMA_DOWNLOAD_URL = "https://data.kma.go.kr/download/downloadNormDataFile.do"
 KMA_STATION_DOWNLOAD_URL = "https://data.kma.go.kr/tmeta/stn/selectStnListDownload.do"
+KMA_STATION_DETAIL_URL = "https://data.kma.go.kr/tmeta/stn/selectStnDetail.do?pgmNo=82&isSelectStn=Y&stdStnNo={station_id}"
 
 SOUTH_NORMALS_FILE = "average30yearsKorea_1991_month.xlsx"
 SOUTH_NORMALS_REAL_NAME = "우리나라기후평년(월별)_1991.xlsx"
@@ -55,24 +58,44 @@ class StationConfig:
 SOUTH_STATIONS = [
     StationConfig(102, "백령도", "백령도", "남한", "수도권·서해"),
     StationConfig(108, "서울", "서울", "남한", "수도권·서해"),
+    StationConfig(98, "동두천", "동두천", "남한", "수도권·서해"),
     StationConfig(112, "인천", "인천", "남한", "수도권·서해"),
+    StationConfig(99, "파주", "파주", "남한", "수도권·서해"),
     StationConfig(119, "수원", "수원", "남한", "수도권·서해"),
     StationConfig(101, "춘천", "춘천", "남한", "강원 영서"),
+    StationConfig(95, "철원", "철원", "남한", "강원 영서"),
+    StationConfig(114, "원주", "원주", "남한", "강원 영서"),
+    StationConfig(121, "영월", "영월", "남한", "강원 영서"),
+    StationConfig(90, "속초", "속초", "남한", "강원 영동"),
     StationConfig(100, "대관령", "대관령", "남한", "강원 영동"),
+    StationConfig(106, "동해", "동해", "남한", "강원 영동"),
     StationConfig(105, "강릉", "강릉", "남한", "강원 영동"),
     StationConfig(129, "서산", "서산", "남한", "충청"),
     StationConfig(131, "청주", "청주", "남한", "충청"),
     StationConfig(133, "대전", "대전", "남한", "충청"),
+    StationConfig(127, "충주", "충주", "남한", "충청"),
+    StationConfig(135, "추풍령", "추풍령", "남한", "충청"),
+    StationConfig(140, "군산", "군산", "남한", "호남"),
     StationConfig(864, "전주", "전주(완산)", "남한", "호남", ("전주(완산)",)),
+    StationConfig(172, "고창", "고창", "남한", "호남"),
     StationConfig(156, "광주", "광주", "남한", "호남"),
     StationConfig(165, "목포", "목포", "남한", "호남"),
+    StationConfig(169, "흑산도", "흑산도", "남한", "호남"),
+    StationConfig(170, "완도", "완도", "남한", "호남"),
     StationConfig(168, "여수", "여수", "남한", "호남"),
     StationConfig(136, "안동", "안동", "남한", "영남"),
+    StationConfig(137, "상주", "상주", "남한", "영남"),
     StationConfig(138, "포항", "포항", "남한", "영남"),
+    StationConfig(130, "울진", "울진", "남한", "영남"),
     StationConfig(152, "울산", "울산", "남한", "영남"),
+    StationConfig(155, "창원", "창원", "남한", "영남"),
+    StationConfig(192, "진주", "진주", "남한", "영남"),
     StationConfig(159, "부산", "부산", "남한", "영남"),
     StationConfig(860, "대구", "대구(신암)", "남한", "영남", ("대구(신암)",)),
+    StationConfig(162, "통영", "통영", "남한", "영남"),
     StationConfig(115, "울릉도", "울릉도", "남한", "영남"),
+    StationConfig(185, "고산", "고산", "남한", "제주"),
+    StationConfig(188, "성산", "성산", "남한", "제주"),
     StationConfig(184, "제주", "제주", "남한", "제주"),
     StationConfig(189, "서귀포", "서귀포", "남한", "제주"),
 ]
@@ -204,55 +227,111 @@ def parse_north_class_days(workbook) -> tuple[dict[int, list[float]], dict[int, 
 
 
 def download_station_metadata(station_ids: list[int]) -> dict[int, dict[str, float]]:
-    payload = request_bytes(
-        KMA_STATION_DOWNLOAD_URL,
-        {
-            "fileType": "csv",
-            "pageIndex": "1",
-            "schListCnt": str(len(station_ids)),
-            "mddlClssCd": "",
-            "stnIds": ",".join(str(station_id) for station_id in station_ids),
-            "serviceSe": "F00101",
-            "txtStnNm": "",
-            "txtElementNm": "",
-            "dTreeId": "",
-            "gTreeId": "",
-            "mddlClssCdDiff": "",
-            "pgmNo": "82",
-        },
-    )
-    text = decode_kma_csv(payload)
-    reader = csv.reader(io.StringIO(text))
     records: dict[int, dict[str, float]] = {}
-    for row in reader:
-        if not row or not row[0].strip().isdigit():
-            continue
-        station_id = int(row[0].strip())
-        end_date = row[2].strip()
-        start_date = row[1].strip()
-        record = {
-            "latitude": float(row[6]),
-            "longitude": float(row[7]),
-            "elevationM": float(row[8]) if row[8].strip() else 0.0,
-            "officialName": row[3].strip(),
-            "_endDate": end_date,
-            "_startDate": start_date,
-        }
-        current = records.get(station_id)
-        if current is None:
-            records[station_id] = record
-            continue
-        current_is_open = current["_endDate"] == ""
-        record_is_open = record["_endDate"] == ""
-        if record_is_open and not current_is_open:
-            records[station_id] = record
-            continue
-        if record_is_open == current_is_open and record["_startDate"] > current["_startDate"]:
-            records[station_id] = record
+    existing_records = load_existing_station_metadata()
+
+    try:
+        payload = request_bytes(
+            KMA_STATION_DOWNLOAD_URL,
+            {
+                "fileType": "csv",
+                "pageIndex": "1",
+                "schListCnt": str(len(station_ids)),
+                "mddlClssCd": "",
+                "stnIds": ",".join(str(station_id) for station_id in station_ids),
+                "serviceSe": "F00101",
+                "txtStnNm": "",
+                "txtElementNm": "",
+                "dTreeId": "",
+                "gTreeId": "",
+                "mddlClssCdDiff": "",
+                "pgmNo": "82",
+            },
+        )
+        if not is_html_document(payload):
+            text = decode_kma_csv(payload)
+            reader = csv.reader(io.StringIO(text))
+            for row in reader:
+                if not row or not row[0].strip().isdigit():
+                    continue
+                station_id = int(row[0].strip())
+                end_date = row[2].strip()
+                start_date = row[1].strip()
+                record = {
+                    "latitude": float(row[6]),
+                    "longitude": float(row[7]),
+                    "elevationM": float(row[8]) if row[8].strip() else 0.0,
+                    "_endDate": end_date,
+                    "_startDate": start_date,
+                }
+                current = records.get(station_id)
+                if current is None:
+                    records[station_id] = record
+                    continue
+                current_is_open = current["_endDate"] == ""
+                record_is_open = record["_endDate"] == ""
+                if record_is_open and not current_is_open:
+                    records[station_id] = record
+                    continue
+                if record_is_open == current_is_open and record["_startDate"] > current["_startDate"]:
+                    records[station_id] = record
+    except Exception:
+        pass
 
     for record in records.values():
         record.pop("_endDate", None)
         record.pop("_startDate", None)
+
+    for station_id in station_ids:
+        if station_id not in records:
+            try:
+                records[station_id] = fetch_station_detail_metadata(station_id)
+            except ValueError:
+                if station_id not in existing_records:
+                    raise
+                records[station_id] = existing_records[station_id]
+
+    return records
+
+
+def fetch_station_detail_metadata(station_id: int) -> dict[str, float]:
+    payload = request_bytes(KMA_STATION_DETAIL_URL.format(station_id=station_id))
+    text = payload.decode("utf-8", errors="replace")
+
+    coordinate_match = re.search(r"위도\s*:\s*([-0-9.]+).*?경도\s*:\s*([-0-9.]+)", text, re.S)
+    elevation_match = re.search(r"해발고도\(m\)</th>\s*<td>\s*([-0-9.]+)\s*</td>", text, re.S)
+
+    if coordinate_match is None or elevation_match is None:
+        raise ValueError(f"Failed to parse KMA station detail page for station {station_id}")
+
+    return {
+        "latitude": float(coordinate_match.group(1)),
+        "longitude": float(coordinate_match.group(2)),
+        "elevationM": float(elevation_match.group(1)),
+    }
+
+
+def is_html_document(payload: bytes) -> bool:
+    head = payload[:256].lstrip().lower()
+    return head.startswith(b"<!doctype html") or head.startswith(b"<html")
+
+
+def load_existing_station_metadata() -> dict[int, dict[str, float]]:
+    if not EXISTING_DATASET_JSON.exists():
+        return {}
+
+    dataset = json.loads(EXISTING_DATASET_JSON.read_text(encoding="utf-8"))
+    records: dict[int, dict[str, float]] = {}
+    for region in dataset.get("regions", []):
+        station_id = region.get("stationId")
+        coordinates = region.get("coordinates") or {}
+        if station_id is None:
+            continue
+        records[int(station_id)] = {
+            "latitude": float(coordinates["latitude"]),
+            "longitude": float(coordinates["longitude"]),
+            "elevationM": float(region.get("elevationM", 0.0)),
+        }
     return records
 
 

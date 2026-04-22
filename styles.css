@@ -93,6 +93,12 @@ body {
   white-space: nowrap;
 }
 
+.app-switch-button {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
 .app-switch-link,
 .app-switch-link:visited,
 .app-switch-link:hover,
@@ -127,6 +133,19 @@ body {
   margin: 14px 0 0;
   color: var(--muted);
   line-height: 1.72;
+}
+
+.easter-egg-toast {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  margin: 12px 0 0;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  background: #f7f7f7;
+  color: var(--ink);
+  font-size: 0.84rem;
+  line-height: 1.5;
 }
 
 .hero-note {

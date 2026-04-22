@@ -76,6 +76,103 @@
   ],
   "regions": [
     {
+      "id": "kma-98",
+      "stationId": 98,
+      "name": "동두천",
+      "officialName": "동두천",
+      "aliases": [
+        "동두천",
+        "동두천"
+      ],
+      "nation": "남한",
+      "zone": "수도권·서해",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 37.9019,
+        "longitude": 127.0607
+      },
+      "elevationM": 115.6,
+      "monthlyTemperatureC": [
+        -3.8,
+        -0.8,
+        5.0,
+        11.6,
+        17.4,
+        21.8,
+        24.3,
+        24.9,
+        20.1,
+        13.1,
+        5.7,
+        -1.9
+      ],
+      "monthlyPrecipitationMm": [
+        18.4,
+        26.0,
+        32.0,
+        73.2,
+        95.2,
+        130.5,
+        431.7,
+        347.5,
+        137.9,
+        55.1,
+        47.4,
+        22.2
+      ],
+      "monthlyColdDaysBelowZero": [
+        29.8,
+        25.9,
+        18.7,
+        2.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4,
+        14.4,
+        28.7
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6,
+        1.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 11.4,
+      "annualPrecipitationMm": 1417.1,
+      "annualColdDaysBelowZero": 121.2,
+      "annualHotDaysAboveTwentyFiveMin": 1.8,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
       "id": "kma-102",
       "stationId": 102,
       "name": "백령도",
@@ -201,7 +298,7 @@
         "latitude": 37.5714,
         "longitude": 126.9658
       },
-      "elevationM": 85.8,
+      "elevationM": 85.7,
       "monthlyTemperatureC": [
         -1.9,
         0.7,
@@ -456,6 +553,394 @@
       "annualPrecipitationMm": 1207.4,
       "annualColdDaysBelowZero": 83.8,
       "annualHotDaysAboveTwentyFiveMin": 7.7,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-99",
+      "stationId": 99,
+      "name": "파주",
+      "officialName": "파주",
+      "aliases": [
+        "파주",
+        "파주"
+      ],
+      "nation": "남한",
+      "zone": "수도권·서해",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 37.8859,
+        "longitude": 126.7665
+      },
+      "elevationM": 30.6,
+      "monthlyTemperatureC": [
+        -4.6,
+        -1.3,
+        4.4,
+        10.8,
+        16.8,
+        21.4,
+        24.2,
+        24.9,
+        19.9,
+        12.6,
+        5.2,
+        -2.6
+      ],
+      "monthlyPrecipitationMm": [
+        17.4,
+        27.9,
+        31.5,
+        74.2,
+        102.0,
+        107.4,
+        395.2,
+        282.9,
+        134.5,
+        50.1,
+        52.7,
+        20.0
+      ],
+      "monthlyColdDaysBelowZero": [
+        29.9,
+        26.3,
+        21.8,
+        4.4,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.6,
+        17.2,
+        29.5
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.4,
+        0.9,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 11.0,
+      "annualPrecipitationMm": 1295.8,
+      "annualColdDaysBelowZero": 131.7,
+      "annualHotDaysAboveTwentyFiveMin": 1.3,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-121",
+      "stationId": 121,
+      "name": "영월",
+      "officialName": "영월",
+      "aliases": [
+        "영월",
+        "영월"
+      ],
+      "nation": "남한",
+      "zone": "강원 영서",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 37.1813,
+        "longitude": 128.4574
+      },
+      "elevationM": 240.5,
+      "monthlyTemperatureC": [
+        -3.6,
+        -0.8,
+        4.9,
+        11.5,
+        17.0,
+        21.3,
+        23.9,
+        24.3,
+        19.2,
+        12.6,
+        5.3,
+        -1.7
+      ],
+      "monthlyPrecipitationMm": [
+        19.1,
+        28.2,
+        45.1,
+        73.5,
+        78.4,
+        137.1,
+        294.8,
+        280.4,
+        139.4,
+        49.4,
+        37.4,
+        22.3
+      ],
+      "monthlyColdDaysBelowZero": [
+        29.8,
+        26.4,
+        20.5,
+        4.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.7,
+        16.8,
+        29.0
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1,
+        0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 11.2,
+      "annualPrecipitationMm": 1205.1,
+      "annualColdDaysBelowZero": 128.5,
+      "annualHotDaysAboveTwentyFiveMin": 0.3,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-114",
+      "stationId": 114,
+      "name": "원주",
+      "officialName": "원주",
+      "aliases": [
+        "원주",
+        "원주"
+      ],
+      "nation": "남한",
+      "zone": "강원 영서",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 37.3375,
+        "longitude": 127.9466
+      },
+      "elevationM": 150.1,
+      "monthlyTemperatureC": [
+        -3.1,
+        -0.3,
+        5.5,
+        12.2,
+        17.9,
+        22.4,
+        25.1,
+        25.3,
+        20.2,
+        13.3,
+        6.0,
+        -1.1
+      ],
+      "monthlyPrecipitationMm": [
+        18.0,
+        28.5,
+        43.8,
+        73.0,
+        86.1,
+        136.7,
+        357.8,
+        289.8,
+        147.0,
+        52.7,
+        42.1,
+        23.5
+      ],
+      "monthlyColdDaysBelowZero": [
+        29.7,
+        25.4,
+        16.5,
+        2.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.1,
+        13.5,
+        27.9
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4,
+        2.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 12.0,
+      "annualPrecipitationMm": 1299.0,
+      "annualColdDaysBelowZero": 116.6,
+      "annualHotDaysAboveTwentyFiveMin": 3.6,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-95",
+      "stationId": 95,
+      "name": "철원",
+      "officialName": "철원",
+      "aliases": [
+        "철원",
+        "철원"
+      ],
+      "nation": "남한",
+      "zone": "강원 영서",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 38.1479,
+        "longitude": 127.3042
+      },
+      "elevationM": 155.5,
+      "monthlyTemperatureC": [
+        -5.7,
+        -2.3,
+        3.7,
+        10.5,
+        16.6,
+        21.1,
+        23.8,
+        24.0,
+        18.9,
+        11.8,
+        4.3,
+        -3.2
+      ],
+      "monthlyPrecipitationMm": [
+        18.2,
+        26.3,
+        30.8,
+        69.0,
+        102.4,
+        119.0,
+        400.0,
+        347.4,
+        121.2,
+        49.9,
+        48.1,
+        22.1
+      ],
+      "monthlyColdDaysBelowZero": [
+        30.5,
+        27.0,
+        24.1,
+        6.1,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.6,
+        18.8,
+        29.6
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.2,
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 10.3,
+      "annualPrecipitationMm": 1354.4,
+      "annualColdDaysBelowZero": 139.7,
+      "annualHotDaysAboveTwentyFiveMin": 0.5,
       "source": {
         "type": "kma",
         "label": "기상청 기후평년값 / 지점정보",
@@ -755,6 +1240,200 @@
       }
     },
     {
+      "id": "kma-106",
+      "stationId": 106,
+      "name": "동해",
+      "officialName": "동해",
+      "aliases": [
+        "동해",
+        "동해"
+      ],
+      "nation": "남한",
+      "zone": "강원 영동",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 37.5071,
+        "longitude": 129.1243
+      },
+      "elevationM": 40.5,
+      "monthlyTemperatureC": [
+        1.1,
+        2.8,
+        6.8,
+        12.2,
+        16.6,
+        19.6,
+        23.2,
+        24.1,
+        19.8,
+        15.1,
+        9.3,
+        3.4
+      ],
+      "monthlyPrecipitationMm": [
+        46.4,
+        44.0,
+        57.6,
+        72.3,
+        63.3,
+        105.9,
+        230.8,
+        227.2,
+        219.8,
+        102.9,
+        71.6,
+        22.5
+      ],
+      "monthlyColdDaysBelowZero": [
+        24.3,
+        18.3,
+        7.5,
+        0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.8,
+        17.4
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.6,
+        1.8,
+        0.1,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 12.8,
+      "annualPrecipitationMm": 1264.3,
+      "annualColdDaysBelowZero": 70.5,
+      "annualHotDaysAboveTwentyFiveMin": 3.5,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-90",
+      "stationId": 90,
+      "name": "속초",
+      "officialName": "속초",
+      "aliases": [
+        "속초",
+        "속초"
+      ],
+      "nation": "남한",
+      "zone": "강원 영동",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 38.2508,
+        "longitude": 128.5647
+      },
+      "elevationM": 17.5,
+      "monthlyTemperatureC": [
+        0.1,
+        1.9,
+        6.3,
+        11.9,
+        16.3,
+        19.8,
+        23.4,
+        24.1,
+        20.1,
+        15.1,
+        8.8,
+        2.5
+      ],
+      "monthlyPrecipitationMm": [
+        43.5,
+        45.9,
+        52.3,
+        73.3,
+        88.5,
+        119.5,
+        265.6,
+        298.0,
+        200.6,
+        87.9,
+        92.0,
+        40.1
+      ],
+      "monthlyColdDaysBelowZero": [
+        25.5,
+        20.6,
+        9.4,
+        0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        4.0,
+        18.3
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.5,
+        2.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 12.5,
+      "annualPrecipitationMm": 1407.2,
+      "annualColdDaysBelowZero": 78.0,
+      "annualHotDaysAboveTwentyFiveMin": 4.5,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
       "id": "kma-133",
       "stationId": 133,
       "name": "대전",
@@ -877,10 +1556,10 @@
         "12월"
       ],
       "coordinates": {
-        "latitude": 36.7737,
-        "longitude": 126.4959
+        "latitude": 36.7766,
+        "longitude": 126.4939
       },
-      "elevationM": 25.9,
+      "elevationM": 25.1,
       "monthlyTemperatureC": [
         -1.6,
         0.1,
@@ -974,10 +1653,10 @@
         "12월"
       ],
       "coordinates": {
-        "latitude": 36.6392,
-        "longitude": 127.4407
+        "latitude": 36.6394,
+        "longitude": 127.4409
       },
-      "elevationM": 58.7,
+      "elevationM": 59.4,
       "monthlyTemperatureC": [
         -1.5,
         1.0,
@@ -1046,6 +1725,297 @@
       }
     },
     {
+      "id": "kma-135",
+      "stationId": 135,
+      "name": "추풍령",
+      "officialName": "추풍령",
+      "aliases": [
+        "추풍령",
+        "추풍령"
+      ],
+      "nation": "남한",
+      "zone": "충청",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 36.2203,
+        "longitude": 127.9946
+      },
+      "elevationM": 245.0,
+      "monthlyTemperatureC": [
+        -1.7,
+        0.5,
+        5.6,
+        12.0,
+        17.1,
+        21.1,
+        23.9,
+        24.2,
+        19.3,
+        13.1,
+        6.6,
+        0.1
+      ],
+      "monthlyPrecipitationMm": [
+        24.1,
+        34.2,
+        52.9,
+        80.3,
+        80.1,
+        136.6,
+        260.7,
+        263.9,
+        135.6,
+        58.1,
+        43.0,
+        25.8
+      ],
+      "monthlyColdDaysBelowZero": [
+        29.2,
+        24.9,
+        17.1,
+        2.4,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6,
+        12.3,
+        27.4
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.2,
+        0.1,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 11.8,
+      "annualPrecipitationMm": 1195.3,
+      "annualColdDaysBelowZero": 113.9,
+      "annualHotDaysAboveTwentyFiveMin": 0.3,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-127",
+      "stationId": 127,
+      "name": "충주",
+      "officialName": "충주",
+      "aliases": [
+        "충주",
+        "충주"
+      ],
+      "nation": "남한",
+      "zone": "충청",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 36.9704,
+        "longitude": 127.9525
+      },
+      "elevationM": 114.8,
+      "monthlyTemperatureC": [
+        -3.2,
+        -0.5,
+        5.3,
+        11.9,
+        17.5,
+        22.1,
+        24.9,
+        25.2,
+        19.9,
+        12.9,
+        5.7,
+        -1.3
+      ],
+      "monthlyPrecipitationMm": [
+        20.0,
+        29.4,
+        41.5,
+        73.8,
+        87.4,
+        134.7,
+        293.3,
+        273.0,
+        140.2,
+        56.7,
+        39.4,
+        24.9
+      ],
+      "monthlyColdDaysBelowZero": [
+        30.1,
+        26.1,
+        19.2,
+        3.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.6,
+        16.0,
+        28.8
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.7,
+        1.1,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 11.7,
+      "annualPrecipitationMm": 1214.3,
+      "annualColdDaysBelowZero": 125.3,
+      "annualHotDaysAboveTwentyFiveMin": 1.8,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-172",
+      "stationId": 172,
+      "name": "고창",
+      "officialName": "고창",
+      "aliases": [
+        "고창",
+        "고창"
+      ],
+      "nation": "남한",
+      "zone": "호남",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 35.3482,
+        "longitude": 126.599
+      },
+      "elevationM": 52.4,
+      "monthlyTemperatureC": [
+        0.0,
+        1.8,
+        6.3,
+        11.9,
+        17.9,
+        22.0,
+        25.6,
+        26.3,
+        21.0,
+        14.8,
+        9.1,
+        2.1
+      ],
+      "monthlyPrecipitationMm": [
+        31.1,
+        33.1,
+        47.0,
+        83.8,
+        69.6,
+        89.0,
+        284.6,
+        285.2,
+        123.8,
+        76.1,
+        59.1,
+        43.1
+      ],
+      "monthlyColdDaysBelowZero": [
+        26.7,
+        23.7,
+        15.3,
+        2.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        4.4,
+        23.1
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5.2,
+        5.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 13.2,
+      "annualPrecipitationMm": 1225.5,
+      "annualColdDaysBelowZero": 95.5,
+      "annualHotDaysAboveTwentyFiveMin": 10.5,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
       "id": "kma-156",
       "stationId": 156,
       "name": "광주",
@@ -1074,7 +2044,7 @@
         "latitude": 35.1729,
         "longitude": 126.8916
       },
-      "elevationM": 72.4,
+      "elevationM": 70.3,
       "monthlyTemperatureC": [
         1.0,
         2.9,
@@ -1135,6 +2105,103 @@
       "annualPrecipitationMm": 1380.6,
       "annualColdDaysBelowZero": 74.7,
       "annualHotDaysAboveTwentyFiveMin": 13.9,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-140",
+      "stationId": 140,
+      "name": "군산",
+      "officialName": "군산",
+      "aliases": [
+        "군산",
+        "군산"
+      ],
+      "nation": "남한",
+      "zone": "호남",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 36.0053,
+        "longitude": 126.7613
+      },
+      "elevationM": 27.9,
+      "monthlyTemperatureC": [
+        -0.1,
+        1.6,
+        5.8,
+        11.5,
+        17.1,
+        21.6,
+        25.1,
+        25.9,
+        21.5,
+        15.3,
+        8.7,
+        2.2
+      ],
+      "monthlyPrecipitationMm": [
+        28.2,
+        35.9,
+        44.7,
+        81.6,
+        85.8,
+        142.2,
+        277.3,
+        266.5,
+        137.5,
+        55.2,
+        53.9,
+        37.2
+      ],
+      "monthlyColdDaysBelowZero": [
+        26.4,
+        22.1,
+        10.0,
+        0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.1,
+        20.5
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.8,
+        5.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 13.0,
+      "annualPrecipitationMm": 1246.0,
+      "annualColdDaysBelowZero": 82.3,
+      "annualHotDaysAboveTwentyFiveMin": 9.1,
       "source": {
         "type": "kma",
         "label": "기상청 기후평년값 / 지점정보",
@@ -1337,6 +2404,103 @@
       }
     },
     {
+      "id": "kma-170",
+      "stationId": 170,
+      "name": "완도",
+      "officialName": "완도",
+      "aliases": [
+        "완도",
+        "완도"
+      ],
+      "nation": "남한",
+      "zone": "호남",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 34.3959,
+        "longitude": 126.7018
+      },
+      "elevationM": 35.4,
+      "monthlyTemperatureC": [
+        2.7,
+        3.9,
+        7.8,
+        12.9,
+        17.6,
+        21.2,
+        24.7,
+        26.0,
+        22.3,
+        16.9,
+        10.8,
+        4.9
+      ],
+      "monthlyPrecipitationMm": [
+        34.0,
+        52.6,
+        103.7,
+        141.7,
+        147.0,
+        207.2,
+        257.2,
+        238.8,
+        176.4,
+        73.0,
+        62.7,
+        37.2
+      ],
+      "monthlyColdDaysBelowZero": [
+        17.2,
+        14.4,
+        3.8,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6,
+        10.9
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.3,
+        5.6,
+        0.3,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 14.3,
+      "annualPrecipitationMm": 1531.5,
+      "annualColdDaysBelowZero": 46.9,
+      "annualHotDaysAboveTwentyFiveMin": 8.2,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
       "id": "kma-864",
       "stationId": 864,
       "name": "전주",
@@ -1427,6 +2591,103 @@
       "annualPrecipitationMm": 1299.3,
       "annualColdDaysBelowZero": 89.9,
       "annualHotDaysAboveTwentyFiveMin": 11.1,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-169",
+      "stationId": 169,
+      "name": "흑산도",
+      "officialName": "흑산도",
+      "aliases": [
+        "흑산도",
+        "흑산도"
+      ],
+      "nation": "남한",
+      "zone": "호남",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 34.6872,
+        "longitude": 125.451
+      },
+      "elevationM": 75.1,
+      "monthlyTemperatureC": [
+        3.4,
+        3.8,
+        6.5,
+        10.7,
+        15.2,
+        19.2,
+        22.9,
+        24.7,
+        21.3,
+        16.9,
+        11.5,
+        5.9
+      ],
+      "monthlyPrecipitationMm": [
+        23.0,
+        32.8,
+        50.8,
+        88.8,
+        96.7,
+        157.5,
+        208.1,
+        211.2,
+        120.5,
+        58.7,
+        46.1,
+        33.1
+      ],
+      "monthlyColdDaysBelowZero": [
+        8.4,
+        6.3,
+        1.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.6
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.5,
+        2.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 13.5,
+      "annualPrecipitationMm": 1127.3,
+      "annualColdDaysBelowZero": 19.6,
+      "annualHotDaysAboveTwentyFiveMin": 2.7,
       "source": {
         "type": "kma",
         "label": "기상청 기후평년값 / 지점정보",
@@ -1630,6 +2891,103 @@
       }
     },
     {
+      "id": "kma-137",
+      "stationId": 137,
+      "name": "상주",
+      "officialName": "상주",
+      "aliases": [
+        "상주",
+        "상주"
+      ],
+      "nation": "남한",
+      "zone": "영남",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 36.4084,
+        "longitude": 128.1574
+      },
+      "elevationM": 96.6,
+      "monthlyTemperatureC": [
+        -0.9,
+        1.4,
+        6.8,
+        12.9,
+        18.6,
+        22.5,
+        24.9,
+        25.3,
+        20.1,
+        13.8,
+        7.2,
+        0.4
+      ],
+      "monthlyPrecipitationMm": [
+        21.7,
+        33.3,
+        46.9,
+        86.6,
+        87.6,
+        115.2,
+        279.3,
+        253.9,
+        138.5,
+        57.1,
+        35.2,
+        23.3
+      ],
+      "monthlyColdDaysBelowZero": [
+        28.3,
+        23.9,
+        12.7,
+        0.8,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6,
+        10.5,
+        26.8
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4,
+        1.1,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 12.8,
+      "annualPrecipitationMm": 1178.6,
+      "annualColdDaysBelowZero": 103.6,
+      "annualHotDaysAboveTwentyFiveMin": 2.5,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
       "id": "kma-136",
       "stationId": 136,
       "name": "안동",
@@ -1752,10 +3110,10 @@
         "12월"
       ],
       "coordinates": {
-        "latitude": 37.48,
-        "longitude": 130.9
+        "latitude": 37.4813,
+        "longitude": 130.8986
       },
-      "elevationM": 220.9,
+      "elevationM": 221.1,
       "monthlyTemperatureC": [
         1.7,
         2.5,
@@ -1921,6 +3279,394 @@
       }
     },
     {
+      "id": "kma-130",
+      "stationId": 130,
+      "name": "울진",
+      "officialName": "울진",
+      "aliases": [
+        "울진",
+        "울진"
+      ],
+      "nation": "남한",
+      "zone": "영남",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 36.9918,
+        "longitude": 129.4128
+      },
+      "elevationM": 49.0,
+      "monthlyTemperatureC": [
+        1.4,
+        3.0,
+        6.9,
+        12.1,
+        16.3,
+        19.4,
+        23.1,
+        23.9,
+        20.0,
+        15.1,
+        9.3,
+        3.6
+      ],
+      "monthlyPrecipitationMm": [
+        48.9,
+        36.9,
+        56.0,
+        76.4,
+        70.5,
+        104.3,
+        203.0,
+        213.0,
+        181.2,
+        97.3,
+        61.0,
+        33.2
+      ],
+      "monthlyColdDaysBelowZero": [
+        24.2,
+        19.9,
+        8.2,
+        0.6,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        4.3,
+        18.4
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.5,
+        1.7,
+        0.1,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 12.8,
+      "annualPrecipitationMm": 1181.7,
+      "annualColdDaysBelowZero": 75.6,
+      "annualHotDaysAboveTwentyFiveMin": 3.3,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-192",
+      "stationId": 192,
+      "name": "진주",
+      "officialName": "진주",
+      "aliases": [
+        "진주",
+        "진주"
+      ],
+      "nation": "남한",
+      "zone": "영남",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 35.1638,
+        "longitude": 128.04
+      },
+      "elevationM": 29.4,
+      "monthlyTemperatureC": [
+        0.3,
+        2.6,
+        7.3,
+        12.9,
+        18.0,
+        21.8,
+        25.3,
+        25.9,
+        21.4,
+        15.0,
+        8.2,
+        2.1
+      ],
+      "monthlyPrecipitationMm": [
+        28.0,
+        45.6,
+        77.6,
+        126.4,
+        137.3,
+        174.3,
+        312.2,
+        296.8,
+        180.7,
+        68.3,
+        44.7,
+        26.1
+      ],
+      "monthlyColdDaysBelowZero": [
+        28.3,
+        24.0,
+        14.2,
+        2.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.4,
+        11.1,
+        26.7
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.3,
+        2.5,
+        0.2,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 13.4,
+      "annualPrecipitationMm": 1518.0,
+      "annualColdDaysBelowZero": 107.2,
+      "annualHotDaysAboveTwentyFiveMin": 5.0,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-155",
+      "stationId": 155,
+      "name": "창원",
+      "officialName": "창원",
+      "aliases": [
+        "창원",
+        "창원"
+      ],
+      "nation": "남한",
+      "zone": "영남",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 35.1702,
+        "longitude": 128.5728
+      },
+      "elevationM": 35.0,
+      "monthlyTemperatureC": [
+        2.6,
+        4.6,
+        8.7,
+        13.8,
+        18.5,
+        21.8,
+        25.3,
+        26.5,
+        22.6,
+        17.3,
+        10.9,
+        4.6
+      ],
+      "monthlyPrecipitationMm": [
+        29.6,
+        46.0,
+        78.5,
+        133.8,
+        146.4,
+        190.7,
+        304.5,
+        283.8,
+        172.9,
+        72.3,
+        47.9,
+        27.7
+      ],
+      "monthlyColdDaysBelowZero": [
+        19.7,
+        13.3,
+        3.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.8,
+        13.7
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5.3,
+        8.3,
+        0.5,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 14.8,
+      "annualPrecipitationMm": 1534.1,
+      "annualColdDaysBelowZero": 50.5,
+      "annualHotDaysAboveTwentyFiveMin": 14.1,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-162",
+      "stationId": 162,
+      "name": "통영",
+      "officialName": "통영",
+      "aliases": [
+        "통영",
+        "통영"
+      ],
+      "nation": "남한",
+      "zone": "영남",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 34.8454,
+        "longitude": 128.4356
+      },
+      "elevationM": 31.2,
+      "monthlyTemperatureC": [
+        3.1,
+        4.8,
+        8.7,
+        13.3,
+        17.6,
+        20.9,
+        24.4,
+        26.0,
+        22.5,
+        17.4,
+        11.3,
+        5.4
+      ],
+      "monthlyPrecipitationMm": [
+        32.2,
+        49.5,
+        92.4,
+        138.8,
+        159.6,
+        195.8,
+        289.1,
+        243.9,
+        177.1,
+        76.4,
+        48.6,
+        32.4
+      ],
+      "monthlyColdDaysBelowZero": [
+        18.7,
+        12.7,
+        3.1,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6,
+        12.0
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.5,
+        6.6,
+        0.4,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 14.6,
+      "annualPrecipitationMm": 1535.8,
+      "annualColdDaysBelowZero": 47.1,
+      "annualHotDaysAboveTwentyFiveMin": 9.5,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
       "id": "kma-138",
       "stationId": 138,
       "name": "포항",
@@ -2018,6 +3764,103 @@
       }
     },
     {
+      "id": "kma-185",
+      "stationId": 185,
+      "name": "고산",
+      "officialName": "고산",
+      "aliases": [
+        "고산",
+        "고산"
+      ],
+      "nation": "남한",
+      "zone": "제주",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 33.2938,
+        "longitude": 126.1628
+      },
+      "elevationM": 71.4,
+      "monthlyTemperatureC": [
+        6.1,
+        6.6,
+        9.4,
+        13.4,
+        17.1,
+        20.7,
+        24.9,
+        26.4,
+        23.0,
+        18.5,
+        13.5,
+        8.5
+      ],
+      "monthlyPrecipitationMm": [
+        40.6,
+        47.8,
+        76.2,
+        94.7,
+        117.7,
+        158.1,
+        167.7,
+        201.9,
+        120.4,
+        56.9,
+        60.2,
+        40.7
+      ],
+      "monthlyColdDaysBelowZero": [
+        2.3,
+        1.9,
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.5
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        6.9,
+        11.7,
+        0.7,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 15.7,
+      "annualPrecipitationMm": 1182.9,
+      "annualColdDaysBelowZero": 5.0,
+      "annualHotDaysAboveTwentyFiveMin": 19.3,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
       "id": "kma-189",
       "stationId": 189,
       "name": "서귀포",
@@ -2107,6 +3950,103 @@
       "annualPrecipitationMm": 1989.6,
       "annualColdDaysBelowZero": 5.0,
       "annualHotDaysAboveTwentyFiveMin": 28.8,
+      "source": {
+        "type": "kma",
+        "label": "기상청 기후평년값 / 지점정보",
+        "period": "1991-2020",
+        "note": "한국지리 버전은 기상청 1991-2020 월평년값과 기상청 지점정보를 기준으로 구성했습니다. 남북한 통일 비교를 위해 보조 지표는 일최저기온 계급별 일수를 사용합니다."
+      }
+    },
+    {
+      "id": "kma-188",
+      "stationId": 188,
+      "name": "성산",
+      "officialName": "성산",
+      "aliases": [
+        "성산",
+        "성산"
+      ],
+      "nation": "남한",
+      "zone": "제주",
+      "months": [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
+      ],
+      "coordinates": {
+        "latitude": 33.3868,
+        "longitude": 126.8802
+      },
+      "elevationM": 20.3,
+      "monthlyTemperatureC": [
+        5.4,
+        6.3,
+        9.5,
+        13.8,
+        17.7,
+        20.9,
+        25.1,
+        26.5,
+        23.2,
+        18.2,
+        12.7,
+        7.5
+      ],
+      "monthlyPrecipitationMm": [
+        77.5,
+        83.2,
+        139.4,
+        161.3,
+        178.0,
+        231.9,
+        271.3,
+        343.2,
+        248.6,
+        114.0,
+        102.8,
+        78.8
+      ],
+      "monthlyColdDaysBelowZero": [
+        7.1,
+        6.5,
+        1.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1,
+        2.3
+      ],
+      "monthlyHotDaysAboveTwentyFiveMin": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        4.1,
+        9.5,
+        0.7,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "annualMeanTemperatureC": 15.6,
+      "annualPrecipitationMm": 2030.0,
+      "annualColdDaysBelowZero": 17.5,
+      "annualHotDaysAboveTwentyFiveMin": 14.3,
       "source": {
         "type": "kma",
         "label": "기상청 기후평년값 / 지점정보",
@@ -4832,9 +6772,9 @@
     }
   ],
   "summary": {
-    "regionCount": 49,
+    "regionCount": 69,
     "nationBreakdown": {
-      "남한": 22,
+      "남한": 42,
       "북한": 27
     },
     "period": "1991-2020",

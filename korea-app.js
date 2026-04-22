@@ -43,6 +43,54 @@ const HERO_MESSAGE_FULL_LINES = [
   "같은 남한인데도 내륙은 연교차로 말하고 해안은 습도로 반응합니다.",
   "추풍령 하나로 공기 결이 달라지는 걸 보면 지형은 정말 성실한 과목입니다.",
   "서울만 보고 지나가면 아쉽습니다. 속초, 완도, 울진이 들어오면 한국지리가 훨씬 살아납니다.",
+  "한반도는 작아 보여도 바다 셋과 산맥 하나만으로 꽤 많은 변주를 만듭니다.",
+  "영동, 영서, 남해안, 제주를 같이 보면 한국지리는 은근히 아니라 꽤 대놓고 입체적입니다.",
+];
+const HERO_MESSAGE_QUIZZES = [
+  "영동과 영서의 겨울 표정이 다른 이유를 하나만 고르라면, 산맥을 먼저 떠올리면 절반은 맞았습니다.",
+  "제주와 울릉도 중 연교차가 더 작아 보일 곳은 어디일까요. 바다가 힌트를 꽤 많이 줍니다.",
+  "서울과 강릉의 겨울 느낌이 다른 건 위도보다 무엇의 영향이 더 클까요.",
+  "같은 동해안이어도 속초와 울진의 그래프 결이 조금 다른 이유는 무엇일까요.",
+  "남해안이 대체로 겨울에 덜 거칠어 보이는 이유를 설명할 단어 하나는 무엇일까요.",
+  "추풍령이 자꾸 등장하는 이유는 단순히 유명해서일까요, 아니면 공기 흐름 때문일까요.",
+  "백령도와 서울을 나란히 두면 겨울 바람의 영향은 어느 쪽에서 더 먼저 보일까요.",
+  "영남 내륙과 해안 도시를 비교할 때 연교차를 갈라놓는 핵심은 무엇일까요.",
+];
+const HERO_MESSAGE_ASIDES = [
+  "태백산맥은 한국지리에서 너무 자주 등장해서 거의 고정 출연진입니다.",
+  "서해안은 안개와 조수, 동해안은 바람과 겨울, 남해안은 비와 온난함으로 기억하면 편합니다.",
+  "한반도는 작아 보여도 동서 차이를 설명할 때는 꽤 성실하게 증거를 냅니다.",
+  "내륙 도시는 계절을 크게 타고, 해안 도시는 바다 눈치를 꽤 많이 봅니다.",
+  "강수량 막대를 보면 해안선이 지도보다 먼저 떠오르는 순간이 있습니다.",
+  "울릉도와 제주는 둘 다 섬이지만, 그래프를 펴 보면 분위기는 생각보다 다르게 움직입니다.",
+  "서울 하나만 보면 평범한데, 속초 하나를 붙이면 갑자기 한국지리가 살아납니다.",
+  "추풍령은 이름이 자주 나오는 데엔 이유가 있습니다. 공기 흐름이 정말 열심히 일합니다.",
+  "제주가 들어오면 한국 기후 비교는 갑자기 훨씬 남쪽 이야기가 됩니다.",
+  "영동과 영서는 늘 같이 불리지만, 날씨에서는 의외로 꽤 다른 팀입니다.",
+];
+const HERO_MESSAGE_DARKS = [
+  "태백산맥은 지도에서는 선 하나지만, 날씨 입장에서는 조용한 판 흔들기 담당입니다.",
+  "영동과 영서는 늘 같이 불리는데 그래프를 펴 보면 서로 합의가 잘 안 됩니다.",
+  "제주는 한국 기후 비교에 들어오는 순간 혼자 시즌 2를 시작합니다.",
+  "추풍령은 이름만 순하고 공기 흐름한테는 거의 교차로 수준으로 바쁩니다.",
+  "서울은 무난한 척하지만, 속초를 옆에 두는 순간 태백산맥이 또 일 냈다는 게 드러납니다.",
+  "서해안은 흐림으로 존재감을 챙기고, 동해안은 바람으로 밀어붙이고, 남해안은 비까지 얹습니다.",
+  "내륙 도시는 계절에 과몰입하고, 해안 도시는 바다 뒤에 숨어서 온화한 척을 합니다.",
+  "울릉도와 제주는 둘 다 섬이지만, 그래프에서는 서로 다른 장르를 찍고 있습니다.",
+  "한반도는 좁아 보여도 산맥 하나와 바다 셋으로 날씨를 꽤 집요하게 갈라놓습니다.",
+  "영남 내륙과 해안은 같은 팀처럼 보이지만 연교차 앞에서는 생각보다 냉정하게 갈립니다.",
+  "백령도와 서울을 나란히 두면 겨울 바람이 누구 편인지 꽤 노골적으로 드러납니다.",
+  "한국지리는 면적이 작아서 쉬운 게 아니라, 작아 보이는데도 차이가 자꾸 나서 더 얄밉습니다.",
+];
+const ECONOMY_EGG_JOKES = [
+  "경제지리 속보: 이 농담은 아직 산업 입지를 못 찾아서 웃음 생산량이 낮습니다.",
+  "공업 단지는 모이기라도 하는데, 제 센스는 아직 집적 효과가 없습니다.",
+  "중심지 이론은 멋있는데 제 드립은 늘 배후지가 너무 좁습니다.",
+  "항만도시는 물류가 돌고, 이 농담은 말만 돕니다.",
+  "오늘의 경제지리 메모: 운송비는 줄여도 썰렁함 비용은 줄이기 어렵습니다.",
+  "입지 삼각형은 계산이라도 되는데, 이 농담은 수요 예측부터 실패했습니다.",
+  "CBD는 중심업무지구인데, 이 드립의 중심 업무는 아직 길을 잃었습니다.",
+  "집적경제는 효율을 올리지만, 어이없는 농담은 모일수록 더 어이가 없어집니다.",
 ];
 const HERO_MESSAGE_OPENERS = [
   "백령도에서 서귀포까지 훑어 보면,",
@@ -55,6 +103,10 @@ const HERO_MESSAGE_OPENERS = [
   "내륙 도시와 해안 도시를 섞어 고르면,",
   "태백산맥을 사이에 두고 보면,",
   "좁아 보이는 한반도도,",
+  "서울 옆에 속초 하나만 붙여도,",
+  "추풍령을 슬쩍 끼워 넣는 순간,",
+  "서해안과 남해안을 같이 세워 두면,",
+  "제주가 비교표에 들어오는 순간,",
 ];
 const HERO_MESSAGE_PAYOFFS = [
   "지형이 얼마나 성실하게 일하는지 바로 보입니다.",
@@ -67,6 +119,10 @@ const HERO_MESSAGE_PAYOFFS = [
   "위도만으로는 설명 안 되는 장면이 자꾸 나옵니다.",
   "영남, 호남, 영서, 영동이 각자 자기 얘기를 합니다.",
   "한국지리가 은근히 아니라 꽤 대놓고 재밌어집니다.",
+  "산맥이 또 조용히 판을 바꿔 놓았다는 게 드러납니다.",
+  "해안과 내륙이 서로 다른 계절을 사는 것처럼 보입니다.",
+  "교과서 설명보다 현실 그래프가 훨씬 독하게 말합니다.",
+  "평범해 보이던 지점도 갑자기 지역색을 숨기지 못합니다.",
 ];
 const COMPARISON_LINE_STYLES = [
   { dasharray: "", marker: "circle" },
@@ -83,6 +139,7 @@ const coordinateFormatter = new Intl.NumberFormat("ko-KR", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
+let economyEggToastTimer = 0;
 
 const state = {
   dataset: window.KOREA_CLIMATE_DATA ?? null,
@@ -99,6 +156,8 @@ const elements = {
   heroText: document.querySelector("#heroText"),
   heroCount: document.querySelector("#heroCount"),
   heroCaption: document.querySelector("#heroCaption"),
+  economyEggButton: document.querySelector("#economyEggButton"),
+  economyEggToast: document.querySelector("#economyEggToast"),
   selectionSummary: document.querySelector("#selectionSummary"),
   searchInput: document.querySelector("#searchInput"),
   randomSpacedSelectionButton: document.querySelector("#randomSpacedSelectionButton"),
@@ -139,8 +198,22 @@ function applyRandomHeroMessage() {
 }
 
 function buildRandomHeroMessage() {
-  if (Math.random() < 0.35) {
+  const roll = Math.random();
+
+  if (roll < 0.18) {
     return pickRandomItem(HERO_MESSAGE_FULL_LINES);
+  }
+
+  if (roll < 0.36) {
+    return pickRandomItem(HERO_MESSAGE_QUIZZES);
+  }
+
+  if (roll < 0.58) {
+    return pickRandomItem(HERO_MESSAGE_ASIDES);
+  }
+
+  if (roll < 0.8) {
+    return pickRandomItem(HERO_MESSAGE_DARKS);
   }
 
   return `${pickRandomItem(HERO_MESSAGE_OPENERS)} ${pickRandomItem(HERO_MESSAGE_PAYOFFS)}`;
@@ -148,6 +221,26 @@ function buildRandomHeroMessage() {
 
 function pickRandomItem(items) {
   return items[Math.floor(Math.random() * items.length)];
+}
+
+function showEconomyEggToast() {
+  if (!elements.economyEggToast) {
+    return;
+  }
+
+  elements.economyEggToast.hidden = false;
+  elements.economyEggToast.textContent = pickRandomItem(ECONOMY_EGG_JOKES);
+
+  if (economyEggToastTimer) {
+    window.clearTimeout(economyEggToastTimer);
+  }
+
+  economyEggToastTimer = window.setTimeout(() => {
+    if (elements.economyEggToast) {
+      elements.economyEggToast.hidden = true;
+    }
+    economyEggToastTimer = 0;
+  }, 3600);
 }
 
 function bindEvents() {
@@ -158,6 +251,10 @@ function bindEvents() {
 
   elements.randomSpacedSelectionButton?.addEventListener("click", () => {
     applyRandomSpacedSelection();
+  });
+
+  elements.economyEggButton?.addEventListener("click", () => {
+    showEconomyEggToast();
   });
 
   elements.clearSelectionButton?.addEventListener("click", () => {
@@ -454,7 +551,8 @@ function renderRegionList(regions) {
     return renderEmptyState("조건에 맞는 지역이 없습니다.", "검색어 또는 필터를 조금 넓혀보세요.");
   }
 
-  return regions
+  return [...regions]
+    .sort((left, right) => collator.compare(left.name, right.name))
     .map((region) => {
       const checked = state.selectedIds.has(region.id);
       return `
@@ -691,7 +789,7 @@ function renderComparison(regions) {
         `;
       }).join("")}
       <div class="chart-card is-wide">
-        <h4>연교차(8월 평균기온 - 1월 평균기온) 비교</h4>
+        <h4>연교차 비교</h4>
         ${renderAnnualRangeChart(rows)}
         <p class="formula-note">* 연교차는 8월 평균기온에서 1월 평균기온을 뺀 값입니다.</p>
       </div>
@@ -1027,7 +1125,7 @@ function renderAnnualRangeChart(rows) {
           `;
         })
         .join("")}
-      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">연교차 (°C)</text>
+      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">°C</text>
     </svg>
   `;
 }

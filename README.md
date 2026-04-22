@@ -93,9 +93,9 @@ python3 scripts/build_korea_dataset.py
 - `styles.css`: UI 스타일
 - `app.js`: 세계지리 데이터 로딩, 표/그래프 렌더링
 - `korea-app.js`: 한국지리 데이터 로딩, 표/그래프 렌더링
-- `data/climate-data.json`: 기본 57개 지역의 번들 기후 데이터
+- `data/climate-data.json`: 확장된 세계 지역 번들 기후 데이터
 - `data/climate-data.js`: 브라우저에서 바로 쓰는 데이터 번들
-- `data/korea-climate-data.json`: 남북한 49개 지점의 기상청 기준 번들 데이터
+- `data/korea-climate-data.json`: 남북한 69개 지점의 기상청 기준 번들 데이터
 - `data/korea-climate-data.js`: 브라우저에서 바로 쓰는 한국지리 데이터 번들
 - `data/world-countries-50m.js`: 브라우저에서 바로 쓰는 고해상도 세계 지도 Topology 번들
 - `data/region-metadata.json`: 좌표, 영문명, 별칭 메타데이터
