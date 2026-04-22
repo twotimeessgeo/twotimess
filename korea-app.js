@@ -82,7 +82,7 @@ const HERO_MESSAGE_DARKS = [
   "백령도와 서울을 나란히 두면 겨울 바람이 누구 편인지 꽤 노골적으로 드러납니다.",
   "한국지리는 면적이 작아서 쉬운 게 아니라, 작아 보이는데도 차이가 자꾸 나서 더 얄밉습니다.",
 ];
-const ECONOMY_EGG_MESSAGE = "<준비중입니다>";
+const ECONOMY_EGG_MESSAGE = "준비중입니다.";
 const HERO_MESSAGE_OPENERS = [
   "백령도에서 서귀포까지 훑어 보면,",
   "영동과 영서를 한 화면에 올리면,",
@@ -130,8 +130,6 @@ const coordinateFormatter = new Intl.NumberFormat("ko-KR", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
-let economyEggToastTimer = 0;
-
 const state = {
   dataset: window.KOREA_CLIMATE_DATA ?? null,
   regions: [],
@@ -148,7 +146,6 @@ const elements = {
   heroCount: document.querySelector("#heroCount"),
   heroCaption: document.querySelector("#heroCaption"),
   economyEggButton: document.querySelector("#economyEggButton"),
-  economyEggToast: document.querySelector("#economyEggToast"),
   selectionSummary: document.querySelector("#selectionSummary"),
   searchInput: document.querySelector("#searchInput"),
   randomSpacedSelectionButton: document.querySelector("#randomSpacedSelectionButton"),
@@ -215,23 +212,7 @@ function pickRandomItem(items) {
 }
 
 function showEconomyEggToast() {
-  if (!elements.economyEggToast) {
-    return;
-  }
-
-  elements.economyEggToast.hidden = false;
-  elements.economyEggToast.textContent = ECONOMY_EGG_MESSAGE;
-
-  if (economyEggToastTimer) {
-    window.clearTimeout(economyEggToastTimer);
-  }
-
-  economyEggToastTimer = window.setTimeout(() => {
-    if (elements.economyEggToast) {
-      elements.economyEggToast.hidden = true;
-    }
-    economyEggToastTimer = 0;
-  }, 3600);
+  window.alert(ECONOMY_EGG_MESSAGE);
 }
 
 function bindEvents() {
@@ -739,9 +720,9 @@ function renderComparison(regions) {
         </tbody>
       </table>
     </div>
-    <p class="formula-note">* 현재 편차 기준: ${escapeHtml(baseline.label)}. 편차 = 해당 지점 값 - ${escapeHtml(
-    baseline.formulaLabel
-  )}${baseline.mode === "region" ? " · 기준 지점은 편차 그래프에서 제외됩니다." : ""}</p>
+    <p class="formula-note">* 현재 편차 기준: ${escapeHtml(baseline.label)}.<br />** 편차 = 해당 지점 값 - ${escapeHtml(
+      baseline.formulaLabel
+    )}${baseline.mode === "region" ? " · 기준 지점은 편차 그래프에서 제외됩니다." : ""}</p>
     <div class="charts-grid">
       <article class="chart-card world-trend-card">
         <h4>월 평균 기온</h4>
@@ -753,7 +734,7 @@ function renderComparison(regions) {
         <h4>누적 강수량</h4>
         ${renderCumulativePrecipitationTrendChart(rows)}
         ${renderTrendLegend(rows, "#555555")}
-        <p class="formula-note">* 누적 강수량은 1월부터 해당 월까지의 강수량 합이며, 선택된 지점 전체에 같은 강수 축을 적용했습니다.</p>
+        <p class="formula-note">* 누적 강수량은 1월부터 해당 월까지의 강수량 합입니다.<br />** 선택된 지점 전체에 같은 강수 축을 적용했습니다.</p>
       </article>
     </div>
     <div class="comparison-pair-grid">
@@ -981,8 +962,8 @@ function renderClimateChart(region, sharedChartScale = null) {
           )}</text>`;
         })
         .join("")}
-      <text x="${margin.left}" y="12" font-size="11" fill="#111111" font-weight="700">기온 (°C)</text>
-      <text x="${width - margin.right}" y="12" text-anchor="end" font-size="11" fill="#555555" font-weight="700">강수량 (mm)</text>
+      <text x="${margin.left}" y="12" font-size="11" fill="#111111" font-weight="700">(°C)</text>
+      <text x="${width - margin.right}" y="12" text-anchor="end" font-size="11" fill="#555555" font-weight="700">(mm)</text>
     </svg>
   `;
 }
@@ -1026,7 +1007,7 @@ function renderPairedTemperatureDeviationChart(rows, leftPeriod, rightPeriod, ba
           `;
         })
         .join("")}
-      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">°C</text>
+      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">(°C)</text>
     </svg>
   `;
 }
@@ -1074,7 +1055,7 @@ function renderPairedPrecipitationDeviationChart(rows, leftPeriod, rightPeriod, 
           `;
         })
         .join("")}
-      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">mm</text>
+      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">(mm)</text>
     </svg>
   `;
 }
@@ -1116,7 +1097,7 @@ function renderAnnualRangeChart(rows) {
           `;
         })
         .join("")}
-      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">°C</text>
+      <text x="${margin.left}" y="14" font-size="11" fill="#111111" font-weight="700">(°C)</text>
     </svg>
   `;
 }
@@ -1174,7 +1155,7 @@ function renderMonthlyTemperatureTrendChart(rows, sharedChartScale) {
           )
         )
         .join("")}
-      <text x="${margin.left}" y="12" font-size="11" fill="#111111" font-weight="700">°C</text>
+      <text x="${margin.left}" y="12" font-size="11" fill="#111111" font-weight="700">(°C)</text>
     </svg>
   `;
 }
@@ -1228,7 +1209,7 @@ function renderCumulativePrecipitationTrendChart(rows) {
           renderTrendSeriesLine(item, index, margin, stepX, 0, yMax, margin.top + chartHeight, "#555555")
         )
         .join("")}
-      <text x="${margin.left}" y="12" font-size="11" fill="#555555" font-weight="700">mm</text>
+      <text x="${margin.left}" y="12" font-size="11" fill="#555555" font-weight="700">(mm)</text>
     </svg>
   `;
 }

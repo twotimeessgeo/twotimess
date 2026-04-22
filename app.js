@@ -88,7 +88,7 @@ const HERO_MESSAGE_DARKS = [
   "내륙은 계절 기복을 숨길 생각이 없고, 해안은 바다 뒤에 숨어서 부드러운 척을 합니다.",
   "교과서에서는 기후가 차분해 보이지만, 그래프를 켜면 지역마다 성격이 꽤 험합니다.",
 ];
-const ECONOMY_EGG_MESSAGE = "<준비중입니다>";
+const ECONOMY_EGG_MESSAGE = "준비중입니다.";
 const HERO_MESSAGE_OPENERS = [
   "비슷한 위도끼리 모아 놔도,",
   "지도에서 멀어 보이는 도시들도,",
@@ -331,7 +331,6 @@ const coordinateFormatter = new Intl.NumberFormat("ko-KR", {
   maximumFractionDigits: 2,
 });
 let mapLayoutAnimationFrame = 0;
-let economyEggToastTimer = 0;
 const APP_CONFIG = normalizeAppConfig(window.CLIMATE_APP_CONFIG ?? {});
 
 const state = {
@@ -366,7 +365,6 @@ const elements = {
   comparisonContent: document.querySelector("#comparisonContent"),
   heroText: document.querySelector("#heroText"),
   economyEggButton: document.querySelector("#economyEggButton"),
-  economyEggToast: document.querySelector("#economyEggToast"),
   heroCount: document.querySelector("#heroCount"),
   heroCaption: document.querySelector("#heroCaption"),
   worldMap: document.querySelector("#worldMap"),
@@ -740,23 +738,7 @@ function buildRandomHeroMessage() {
 }
 
 function showEconomyEggToast() {
-  if (!elements.economyEggToast) {
-    return;
-  }
-
-  elements.economyEggToast.hidden = false;
-  elements.economyEggToast.textContent = ECONOMY_EGG_MESSAGE;
-
-  if (economyEggToastTimer) {
-    window.clearTimeout(economyEggToastTimer);
-  }
-
-  economyEggToastTimer = window.setTimeout(() => {
-    if (elements.economyEggToast) {
-      elements.economyEggToast.hidden = true;
-    }
-    economyEggToastTimer = 0;
-  }, 3600);
+  window.alert(ECONOMY_EGG_MESSAGE);
 }
 
 function pickRandomItem(items) {
@@ -1783,7 +1765,7 @@ function renderComparison(selectedRegions) {
         <h4>누적 강수량</h4>
         ${renderCumulativePrecipitationTrendChart(selectedRegions)}
         ${renderTrendLegend(selectedRegions, COLORS.rain)}
-        <p class="formula-note">* 누적 강수량은 1월부터 해당 월까지의 강수량 합이며, 선택한 지역 전체에 같은 강수 축을 적용했습니다.</p>
+        <p class="formula-note">* 누적 강수량은 1월부터 해당 월까지의 강수량 합입니다.<br />** 선택한 지역 전체에 같은 강수 축을 적용했습니다.</p>
       </article>
     </div>
   `;
@@ -1891,10 +1873,10 @@ function renderMonthPanel(selectedRegions, monthIndex, panelIndex, baseline) {
       <p class="formula-note">
         * 현재 기준: ${escapeHtml(baseline.label)}
         <br />
-        * 평균 기온 차이 = 해당 지역 기온 − ${escapeHtml(baseline.formulaLabel)}
+        ** 평균 기온 차이 = 해당 지역 기온 − ${escapeHtml(baseline.formulaLabel)}
         <br />
-        * 강수량 차이 = 해당 지역 강수량 − ${escapeHtml(baseline.formulaLabel)}
-        ${baseline.mode === "region" ? "<br />* 기준 지역은 편차 그래프에서 제외했습니다." : ""}
+        ** 강수량 차이 = 해당 지역 강수량 − ${escapeHtml(baseline.formulaLabel)}
+        ${baseline.mode === "region" ? "<br />** 기준 지역은 편차 그래프에서 제외했습니다." : ""}
       </p>
     </article>
   `;
@@ -1969,7 +1951,7 @@ function renderMonthlyTemperatureTrendChart(selectedRegions, sharedChartScale) {
           )
         )
         .join("")}
-      <text x="${margin.left}" y="12" font-size="11" fill="${COLORS.temperature}" font-weight="700">°C</text>
+      <text x="${margin.left}" y="12" font-size="11" fill="${COLORS.temperature}" font-weight="700">(°C)</text>
     </svg>
   `;
 }
@@ -2033,7 +2015,7 @@ function renderCumulativePrecipitationTrendChart(selectedRegions) {
           renderTrendSeriesLine(series, index, margin, stepX, 0, yMax, margin.top + chartHeight, COLORS.rain)
         )
         .join("")}
-      <text x="${margin.left}" y="12" font-size="11" fill="${COLORS.rain}" font-weight="700">mm</text>
+      <text x="${margin.left}" y="12" font-size="11" fill="${COLORS.rain}" font-weight="700">(mm)</text>
     </svg>
   `;
 }
@@ -2210,8 +2192,8 @@ function renderClimateChart(region, sharedChartScale = null) {
       <polyline fill="none" stroke="${COLORS.temperature}" stroke-width="3" points="${points}" />
       ${pointDots}
       ${monthLabels}
-      <text x="${margin.left}" y="12" font-size="11" fill="${COLORS.temperature}" font-weight="700">기온 (°C)</text>
-      <text x="${width - margin.right}" y="12" text-anchor="end" font-size="11" fill="${COLORS.rain}" font-weight="700">강수량 (mm)</text>
+      <text x="${margin.left}" y="12" font-size="11" fill="${COLORS.temperature}" font-weight="700">(°C)</text>
+      <text x="${width - margin.right}" y="12" text-anchor="end" font-size="11" fill="${COLORS.rain}" font-weight="700">(mm)</text>
     </svg>
   `;
 }
@@ -2274,7 +2256,7 @@ function renderDeviationTemperatureChart(rows) {
       <line x1="${width - margin.right}" y1="${margin.top}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="${COLORS.grid}" />
       <line x1="${margin.left}" y1="${margin.top + chartHeight}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="${COLORS.grid}" />
       ${points}
-      <text x="${margin.left}" y="14" font-size="11" fill="${COLORS.ink}" font-weight="700">°C</text>
+      <text x="${margin.left}" y="14" font-size="11" fill="${COLORS.ink}" font-weight="700">(°C)</text>
     </svg>
   `;
 }
@@ -2349,7 +2331,7 @@ function renderDeviationPrecipitationChart(rows) {
       <line x1="${width - margin.right}" y1="${margin.top}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="${COLORS.grid}" />
       <line x1="${margin.left}" y1="${margin.top + chartHeight}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="${COLORS.grid}" />
       ${bars}
-      <text x="${margin.left}" y="14" font-size="11" fill="${COLORS.ink}" font-weight="700">mm</text>
+      <text x="${margin.left}" y="14" font-size="11" fill="${COLORS.ink}" font-weight="700">(mm)</text>
     </svg>
   `;
 }
