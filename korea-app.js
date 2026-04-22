@@ -134,6 +134,7 @@ const state = {
   dataset: window.KOREA_CLIMATE_DATA ?? null,
   regions: [],
   search: "",
+  regionSort: document.querySelector("#regionSortSelect")?.value || "default",
   nation: "전체",
   zone: "전체",
   mapScope: "all",
@@ -148,6 +149,7 @@ const elements = {
   economyEggButton: document.querySelector("#economyEggButton"),
   selectionSummary: document.querySelector("#selectionSummary"),
   searchInput: document.querySelector("#searchInput"),
+  regionSortSelect: document.querySelector("#regionSortSelect"),
   randomSpacedSelectionButton: document.querySelector("#randomSpacedSelectionButton"),
   clearSelectionButton: document.querySelector("#clearSelectionButton"),
   nationChips: document.querySelector("#nationChips"),
@@ -218,6 +220,11 @@ function showEconomyEggToast() {
 function bindEvents() {
   elements.searchInput?.addEventListener("input", (event) => {
     state.search = event.target.value ?? "";
+    render();
+  });
+
+  elements.regionSortSelect?.addEventListener("change", (event) => {
+    state.regionSort = event.target.value || "default";
     render();
   });
 
@@ -397,8 +404,8 @@ function normalizeComparisonBaseline(selectedRegions) {
 }
 
 function render() {
-  const visibleRegions = getVisibleRegions();
-  const selectedRegions = getSelectedRegions();
+  const visibleRegions = sortDisplayedRegions(getVisibleRegions());
+  const selectedRegions = sortDisplayedRegions(getSelectedRegions());
   normalizeComparisonBaseline(selectedRegions);
 
   if (elements.heroCount) {
@@ -452,6 +459,27 @@ function getVisibleRegions() {
 
 function getSelectedRegions() {
   return state.regions.filter((region) => state.selectedIds.has(region.id));
+}
+
+function sortDisplayedRegions(regions) {
+  return [...regions].sort(compareRegionsByActiveSort);
+}
+
+function compareRegionsByActiveSort(left, right) {
+  switch (state.regionSort) {
+    case "name":
+      return collator.compare(left.name, right.name);
+    case "annualPrecipitationDesc":
+      return compareNumericDescending(left.annualPrecipitationMm, right.annualPrecipitationMm, left, right);
+    case "annualRangeDesc":
+      return compareNumericDescending(getAnnualTemperatureRange(left), getAnnualTemperatureRange(right), left, right);
+    case "warmestMonthDesc":
+      return compareNumericDescending(getWarmestMonthTemperature(left), getWarmestMonthTemperature(right), left, right);
+    case "coldestMonthAsc":
+      return compareNumericAscending(getColdestMonthTemperature(left), getColdestMonthTemperature(right), left, right);
+    default:
+      return sortRegions(left, right);
+  }
 }
 
 function getMapRegions(visibleRegions, selectedRegions) {
@@ -523,8 +551,7 @@ function renderRegionList(regions) {
     return renderEmptyState("조건에 맞는 지역이 없습니다.", "검색어 또는 필터를 조금 넓혀보세요.");
   }
 
-  return [...regions]
-    .sort((left, right) => collator.compare(left.name, right.name))
+  return regions
     .map((region) => {
       const checked = state.selectedIds.has(region.id);
       return `
@@ -887,6 +914,14 @@ function getPeriodMetrics(region, period) {
 
 function getAnnualTemperatureRange(region) {
   return round(region.monthlyTemperatureC[7] - region.monthlyTemperatureC[0]);
+}
+
+function getWarmestMonthTemperature(region) {
+  return Math.max(...region.monthlyTemperatureC);
+}
+
+function getColdestMonthTemperature(region) {
+  return Math.min(...region.monthlyTemperatureC);
 }
 
 function renderClimateChart(region, sharedChartScale = null) {
@@ -1451,6 +1486,22 @@ function sortRegions(left, right) {
     return leftIndex - rightIndex;
   }
   return collator.compare(left.name, right.name);
+}
+
+function compareNumericDescending(leftValue, rightValue, leftRegion, rightRegion) {
+  const difference = rightValue - leftValue;
+  if (Math.abs(difference) > 0.0001) {
+    return difference;
+  }
+  return sortRegions(leftRegion, rightRegion);
+}
+
+function compareNumericAscending(leftValue, rightValue, leftRegion, rightRegion) {
+  const difference = leftValue - rightValue;
+  if (Math.abs(difference) > 0.0001) {
+    return difference;
+  }
+  return sortRegions(leftRegion, rightRegion);
 }
 
 function normalizeText(value) {

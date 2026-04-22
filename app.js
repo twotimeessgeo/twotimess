@@ -344,6 +344,7 @@ const state = {
   hemisphere: "전체",
   climateGroup: "전체",
   query: "",
+  regionSort: document.querySelector("#regionSortSelect")?.value || "default",
   mapScope: "all",
   apiResults: [],
   apiLoading: false,
@@ -354,6 +355,7 @@ const state = {
 
 const elements = {
   searchInput: document.querySelector("#searchInput"),
+  regionSortSelect: document.querySelector("#regionSortSelect"),
   clearSelectionButton: document.querySelector("#clearSelectionButton"),
   randomClimateSelectionButton: document.querySelector("#randomClimateSelectionButton"),
   continentChips: document.querySelector("#continentChips"),
@@ -477,6 +479,11 @@ async function fetchWorldTopologyWithFallback(urls) {
 function bindEvents() {
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value.trim();
+    render();
+  });
+
+  elements.regionSortSelect?.addEventListener("change", (event) => {
+    state.regionSort = event.target.value || "default";
     render();
   });
 
@@ -746,8 +753,8 @@ function pickRandomItem(items) {
 }
 
 function render() {
-  const visibleRegions = getVisibleRegions();
-  const selectedRegions = getSelectedRegions();
+  const visibleRegions = sortDisplayedRegions(getVisibleRegions());
+  const selectedRegions = sortDisplayedRegions(getSelectedRegions());
   normalizeComparisonBaseline(selectedRegions);
   const mappableRegions = getMapRegions(visibleRegions, selectedRegions);
 
@@ -811,6 +818,27 @@ function getVisibleRegions() {
 
 function getSelectedRegions() {
   return state.regions.filter((region) => state.selectedIds.has(region.id));
+}
+
+function sortDisplayedRegions(regions) {
+  return [...regions].sort(compareRegionsByActiveSort);
+}
+
+function compareRegionsByActiveSort(left, right) {
+  switch (state.regionSort) {
+    case "name":
+      return collator.compare(left.name, right.name);
+    case "annualPrecipitationDesc":
+      return compareNumericDescending(left.annualPrecipitationMm, right.annualPrecipitationMm, left, right);
+    case "annualRangeDesc":
+      return compareNumericDescending(getWorldAnnualTemperatureRange(left), getWorldAnnualTemperatureRange(right), left, right);
+    case "warmestMonthDesc":
+      return compareNumericDescending(getWarmestMonthTemperature(left), getWarmestMonthTemperature(right), left, right);
+    case "coldestMonthAsc":
+      return compareNumericAscending(getColdestMonthTemperature(left), getColdestMonthTemperature(right), left, right);
+    default:
+      return sortRegions(left, right);
+  }
 }
 
 function getMapRegions(visibleRegions, selectedRegions) {
@@ -980,8 +1008,7 @@ function renderRegionOptions(regions) {
     );
   }
 
-  return [...regions]
-    .sort((left, right) => collator.compare(left.name, right.name))
+  return regions
     .map((region) => {
       const isSelected = state.selectedIds.has(region.id);
       return `
@@ -2675,6 +2702,34 @@ function projectMapY(latitude) {
 
 function getClimateColor(climateGroup) {
   return CLIMATE_COLORS[climateGroup] ?? COLORS.rain;
+}
+
+function getWarmestMonthTemperature(region) {
+  return Math.max(...region.monthlyTemperatureC);
+}
+
+function getColdestMonthTemperature(region) {
+  return Math.min(...region.monthlyTemperatureC);
+}
+
+function getWorldAnnualTemperatureRange(region) {
+  return round(getWarmestMonthTemperature(region) - getColdestMonthTemperature(region));
+}
+
+function compareNumericDescending(leftValue, rightValue, leftRegion, rightRegion) {
+  const difference = rightValue - leftValue;
+  if (Math.abs(difference) > 0.0001) {
+    return difference;
+  }
+  return sortRegions(leftRegion, rightRegion);
+}
+
+function compareNumericAscending(leftValue, rightValue, leftRegion, rightRegion) {
+  const difference = leftValue - rightValue;
+  if (Math.abs(difference) > 0.0001) {
+    return difference;
+  }
+  return sortRegions(leftRegion, rightRegion);
 }
 
 function clamp(value, min, max) {

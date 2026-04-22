@@ -48,7 +48,7 @@
             <div class="selection-summary" id="selectionSummary">0개 선택됨</div>
           </div>
 
-          <div class="control-bar">
+          <div class="control-bar has-sort">
             <label class="search-field" for="searchInput">
               <span>지역 검색</span>
               <input
@@ -57,6 +57,17 @@
                 placeholder="예: 케이프타운, 파리, Aw"
                 autocomplete="off"
               />
+            </label>
+            <label class="search-field sort-field" for="regionSortSelect">
+              <span>지역 정렬</span>
+              <select id="regionSortSelect">
+                <option value="default">기본순</option>
+                <option value="name">가나다순</option>
+                <option value="annualPrecipitationDesc">연 강수량 많은 순</option>
+                <option value="annualRangeDesc">연교차 큰 순</option>
+                <option value="warmestMonthDesc">최난월 기온 높은 순</option>
+                <option value="coldestMonthAsc">최한월 기온 낮은 순</option>
+              </select>
             </label>
             <div class="action-row">
               <button type="button" class="ghost-button" id="randomClimateSelectionButton">

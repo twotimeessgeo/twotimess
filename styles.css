@@ -223,6 +223,10 @@ body {
   align-items: end;
 }
 
+.control-bar.has-sort {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 250px) auto;
+}
+
 .search-field {
   display: grid;
   gap: 8px;
@@ -230,7 +234,8 @@ body {
   font-weight: 700;
 }
 
-.search-field input {
+.search-field input,
+.search-field select {
   width: 100%;
   min-height: 52px;
   padding: 14px 16px;
@@ -241,9 +246,14 @@ body {
   font: inherit;
 }
 
-.search-field input:focus {
+.search-field input:focus,
+.search-field select:focus {
   outline: 2px solid rgba(0, 0, 0, 0.08);
   outline-offset: 1px;
+}
+
+.sort-field {
+  min-width: 0;
 }
 
 .action-row,
@@ -1146,6 +1156,14 @@ tfoot td {
   .comparison-controls {
     grid-template-columns: 1fr;
     align-items: start;
+  }
+
+  .control-bar.has-sort {
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 220px);
+  }
+
+  .control-bar.has-sort .action-row {
+    grid-column: 1 / -1;
   }
 
   .comparison-select {
