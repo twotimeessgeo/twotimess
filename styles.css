@@ -619,7 +619,7 @@ tfoot td {
 .world-map-frame {
   position: relative;
   aspect-ratio: 1000 / 520;
-  min-height: clamp(320px, 48vw, 580px);
+  min-height: 0;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 0;
@@ -627,7 +627,7 @@ tfoot td {
 }
 
 .world-map-frame.is-natural {
-  aspect-ratio: 1000 / 540;
+  aspect-ratio: 1000 / 520;
 }
 
 .world-map-frame.is-korea {
@@ -1266,8 +1266,8 @@ tfoot td {
   }
 
   .world-map-frame {
-    min-height: 300px;
-    aspect-ratio: 1 / 1;
+    min-height: 0;
+    aspect-ratio: 1000 / 520;
   }
 
   .world-map-frame.is-korea {
@@ -1346,7 +1346,7 @@ tfoot td {
   }
 
   .world-map-frame {
-    min-height: 260px;
+    min-height: 0;
   }
 
   .world-stage #worldMap .empty-state {
